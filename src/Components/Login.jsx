@@ -30,8 +30,8 @@ export default function FypHomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col mt-10 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-      <div className="mt-10">
+    <div className="min-h-screen flex flex-col  bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <div className="">
         <Navbar />
       </div>
       {/* 🎥 Hero Section with Smooth Video Transition */}
