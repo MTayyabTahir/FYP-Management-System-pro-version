@@ -9,7 +9,7 @@ const Navbar = () => {
   const handleLogin = (role) => {
     localStorage.setItem("role", role);
     if (role === "student") navigate("/student/dashboard");
-    else if (role === "coordinator")
+    else if (role === "super-admin")
       navigate("/dashboard"); // Changed from "super-admin" to "coordinator"
     else if (role === "supervisor") navigate("/supervisor/dashboard");
     setIsLoginModalOpen(false);
@@ -115,7 +115,7 @@ const Navbar = () => {
                 Login as Student
               </button>
               <button
-                onClick={() => handleLogin("coordinator")}
+                onClick={() => handleLogin("super-admin")}
                 className="w-full py-3 rounded-lg bg-green-600 text-white font-medium text-lg shadow-md hover:bg-green-700 transition-colors"
               >
                 Login as Coordinator
