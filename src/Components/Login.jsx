@@ -1,430 +1,407 @@
-import React, { useState } from "react";
-import { User, Users, ClipboardList } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import logo from "/assets/arid.png";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Navbar from "./Navbar2";
+import Footer from "./Footer";
 
-export default function FypPortal() {
+export default function FypHomePage() {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState("FYP Registration");
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState(0);
 
+  // 🎬 Your video clips
+  const videoClips = ["./clip1.mp4", "./clip3.mp4"];
+
+  // ⏱ Auto change videos every 8 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentVideo((prev) => (prev + 1) % videoClips.length);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // 🔑 Handle Login Role Navigation
   const handleLogin = (role) => {
     localStorage.setItem("role", role);
     if (role === "student") navigate("/student/dashboard");
     else if (role === "super-admin") navigate("/dashboard");
     else if (role === "supervisor") navigate("/supervisor/dashboard");
-  };
-
-  const navItems = [
-    "FYP Registration",
-    "FYP Ideas",
-    "FYP-1 Deliverable Deadlines and Details",
-    "FYP-2 Deliverable Deadlines and Details",
-    "FYP - Rules and General Submission Instructions",
-    "Contacts",
-  ];
-
-  const contentMap = {
-    // ✅ Registration
-    "FYP Registration": (
-      <div className="space-y-6 text-gray-800 leading-relaxed">
-        <h2 className="text-2xl font-bold border-b-2 border-green-600 pb-1">
-          FYP Registration
-        </h2>
-        <h3 className="font-bold text-lg text-green-700 underline">
-          Registration Rules:
-        </h3>
-        <ul className="list-disc list-inside space-y-1">
-          <li>
-            For FYP-1 registration, you have to meet the eligibility criteria.
-          </li>
-          <li>
-            An FYP group must consist of 2 or 3 members{" "}
-            <span className="text-red-600 font-semibold">
-              (Cross-departmental groups are not allowed)
-            </span>
-            .
-          </li>
-          <li>
-            If any FYP group is taking a project with an external supervisor,
-            then it must have an internal supervisor (UIIT Faculty Member).
-          </li>
-        </ul>
-        <h3 className="font-bold text-lg text-green-700 underline">
-          Eligibility Criteria
-        </h3>
-        <ol className="list-decimal list-inside space-y-1">
-          <li>CGPA ≥ 2.0 (not on academic warning)</li>
-          <li>No deficiency → Earned credit hours ≥ 100</li>
-          <li>One-course deficiency → Earned credit hours ≥ 96</li>
-          <li>Two-course deficiency → Earned credit hours ≥ 92</li>
-        </ol>
-      </div>
-    ),
-
-    // ✅ FYP Ideas
-    "FYP Ideas": (
-      <div className="space-y-4 text-gray-800 leading-relaxed">
-        <h2 className="text-2xl font-bold border-b-2 border-green-600 pb-1">
-          FYP Ideas
-        </h2>
-        <p className="font-medium">
-          Some Potential Sources to Explore the FYP topics. Click the links
-          below to view projects in each type:
-        </p>
-        <ul className="list-disc list-inside space-y-2 text-green-700">
-          <li>
-            <a
-              href="https://nevonprojects.com/latest-data-mining-projects-topics-ideas/"
-              target="_blank"
-              className="underline"
-            >
-              Data Mining Project Ideas – Nevonprojects
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://nevonprojects.com/machine-learning-deep-learning-project-ideas/"
-              target="_blank"
-              className="underline"
-            >
-              Machine Learning & Deep Learning Project Ideas – Nevonprojects
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://nevonprojects.com/asp-net-projects/"
-              target="_blank"
-              className="underline"
-            >
-              Dot Net Projects – Nevonprojects
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://nevonprojects.com/ios-projects/"
-              target="_blank"
-              className="underline"
-            >
-              iOS Based Project Ideas – Nevonprojects
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://nevonprojects.com/data-science-project-ideas/"
-              target="_blank"
-              className="underline"
-            >
-              Data Science Project Ideas – Nevonprojects
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://nevonprojects.com/artificial-intelligence-project-ideas/"
-              target="_blank"
-              className="underline"
-            >
-              Artificial Intelligence Project Ideas – Nevonprojects
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://nevonprojects.com/information-security-project-ideas/"
-              target="_blank"
-              className="underline"
-            >
-              Information Security Projects – Nevonprojects
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://itsourcecode.com/mini-projects/final-year-project-ideas-for-it-students-2021/"
-              target="_blank"
-              className="underline"
-            >
-              Miscellaneous FYP Ideas – ITSourceCode
-            </a>
-          </li>
-        </ul>
-      </div>
-    ),
-
-    // ✅ FYP-1 Deliverables with Table
-    "FYP-1 Deliverable Deadlines and Details": (
-      <div className="space-y-6 text-gray-800 leading-relaxed">
-        <h2 className="text-2xl font-bold border-b-2 border-green-600 pb-1">
-          FYP-1 Deliverable Deadlines and Details
-        </h2>
-
-        <table className="w-full border border-gray-300 text-left">
-          <thead className="bg-green-600 text-white">
-            <tr>
-              <th className="p-2 border">Deliverable</th>
-              <th className="p-2 border">Details</th>
-              <th className="p-2 border">Due Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="p-2 border">DI</td>
-              <td className="p-2 border">Project Proposal</td>
-              <td className="p-2 border">3rd Week – Fri, Sep 05, 2025</td>
-            </tr>
-            <tr>
-              <td className="p-2 border"></td>
-              <td className="p-2 border">Proposal Defence</td>
-              <td className="p-2 border">5th Week – Fri, Sep 19, 2025</td>
-            </tr>
-            <tr>
-              <td className="p-2 border">DII</td>
-              <td className="p-2 border">
-                FYP Report (6 Chapters R&D / 5 Chapters Dev)
-              </td>
-              <td className="p-2 border">8th Week – Wed, Oct 08, 2025</td>
-            </tr>
-            <tr>
-              <td className="p-2 border"></td>
-              <td className="p-2 border">Mid Evaluations</td>
-              <td className="p-2 border">9/10th Week – Oct 17-24, 2025</td>
-            </tr>
-            <tr>
-              <td className="p-2 border">DIII</td>
-              <td className="p-2 border">
-                FYP Report (Chapters 7, 9, 10 R&D / 7, 10 Dev)
-              </td>
-              <td className="p-2 border">13th Week – Wed, Nov 12, 2025</td>
-            </tr>
-            <tr>
-              <td className="p-2 border"></td>
-              <td className="p-2 border">
-                Signed FYP Report Submission in Office
-              </td>
-              <td className="p-2 border">16th Week – Wed, Dec 03, 2025</td>
-            </tr>
-            <tr>
-              <td className="p-2 border">Final</td>
-              <td className="p-2 border">FYP Final Evaluations</td>
-              <td className="p-2 border">17th Week – Fri, Dec 12, 2025</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 className="font-semibold text-green-700 mt-4">
-          Deliverable I – Project Proposal
-        </h3>
-        <p>
-          Download the template:{" "}
-          <a href="" className="underline text-green-700">
-            D1 Project Proposal Template
-          </a>
-          . You may see sample proposals for reference.
-        </p>
-
-        <h3 className="font-semibold text-green-700 mt-4">Deliverable II</h3>
-        <p>
-          Download the FYP report template:{" "}
-          <a href="#" className="underline text-green-700">
-            FYP Report Zip
-          </a>
-          . Submit chapters based on your project type.
-        </p>
-
-        <h3 className="font-semibold text-green-700 mt-4">
-          FYP Mid Evaluations
-        </h3>
-        <p>
-          Submit signed Compliance Form to academic office. Prepare 10–15 min
-          presentation covering problem statement, scope, goals, methodology,
-          prototype/data.
-        </p>
-
-        <h3 className="font-semibold text-green-700 mt-4">Deliverable III</h3>
-        <p>
-          Submit updated report (with feedback). Include implementation, test
-          cases, results (R&D), and future work.
-        </p>
-
-        <h3 className="font-semibold text-green-700 mt-4">
-          FYP Final Evaluations
-        </h3>
-        <p>
-          Submit signed hard copy report with Turnitin (≤20%). Present
-          prototype, goals achieved, and sync docs with app. Dressing must be
-          formal, and medium English.
-        </p>
-      </div>
-    ),
-
-    // ✅ FYP-2
-    "FYP-2 Deliverable Deadlines and Details": (
-      <div className="space-y-6 text-gray-800 leading-relaxed">
-        <h2 className="text-2xl font-bold border-b-2 border-green-600 pb-1">
-          Deliverable II – FYP Report
-        </h2>
-        <p>
-          Download the{" "}
-          <a href="#" className="text-green-700 underline">
-            FYP Report Zip
-          </a>
-          .
-        </p>
-        <h3 className="font-semibold text-green-700 mt-3">R&D Projects</h3>
-        <ul className="list-disc list-inside space-y-1">
-          <li>Introduction</li>
-          <li>Project Vision</li>
-          <li>Literature Review</li>
-          <li>Software Requirement Specifications</li>
-          <li>Proposed Methodology</li>
-          <li>Design (High & Low level)</li>
-        </ul>
-      </div>
-    ),
-
-    // ✅ Rules
-    "FYP - Rules and General Submission Instructions": (
-      <div className="space-y-6 text-gray-800 leading-relaxed">
-        <h2 className="text-2xl font-bold border-b-2 border-green-600 pb-1">
-          FYP Rules & General Submission Instructions
-        </h2>
-        <ul className="list-disc list-inside space-y-1">
-          <li>Minimum 5 supervisor meetings required (else F grade).</li>
-          <li>Submit monthly progress reports.</li>
-          <li>Deliverables must follow template & deadlines.</li>
-          <li>Unsatisfactory deliverables → grade below A-.</li>
-          <li>Late signed docs → no evaluations allowed.</li>
-          <li>All assessments are individual.</li>
-        </ul>
-        <h3 className="text-lg font-semibold">General Instructions</h3>
-        <ul className="list-disc list-inside space-y-1">
-          <li>Use Two-Page Layout before submission.</li>
-          <li>Get supervisor approval in advance.</li>
-          <li>Submit only PDF (no Word/Zip).</li>
-          <li>One submission per deliverable checked only.</li>
-        </ul>
-      </div>
-    ),
-
-    // ✅ Contacts last
-    Contacts: (
-      <div className="space-y-6 text-gray-800">
-        <h2 className="text-2xl font-bold border-b-2 border-green-600 pb-1">
-          Contacts
-        </h2>
-        <div>
-          <h3 className="font-bold text-green-700">
-            Dr. Saif ur Rehman (Morning)
-          </h3>
-          <p>HEC Approved Supervisor</p>
-          <p>Qualification: Ph.D, MS, MCS (Gold Medalist)</p>
-          <p>
-            Area of Interest: AI, Machine Learning, Data Mining, Graph Mining,
-            Social Network Analysis
-          </p>
-          <p>Email: Saif@uaar.edu.pk</p>
-        </div>
-        <div>
-          <h3 className="font-bold text-green-700">
-            Dr. Kashif Sattar (Evening)
-          </h3>
-          <p>Assistant Professor, HEC Approved Supervisor</p>
-          <p>Qualification: Ph.D, NUST</p>
-          <p>
-            Area of Interest: IoT Networks, Routing, Topology Control, Precision
-            Agriculture
-          </p>
-          <p>Email: kashif@uaar.edu.pk</p>
-        </div>
-      </div>
-    ),
+    setIsLoginModalOpen(false);
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
-      {/* Top Navbar */}
-      <header className="w-full bg-white border-b shadow-sm px-8 py-3 flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-3">
-          <img src={logo} alt="Logo" className="w-12 h-12" />
-          <div>
-            <h1 className="font-bold text-lg text-green-700">
-              University Institute of Information Technology
-            </h1>
-            <p className="text-sm text-gray-600">
-              PMAS Arid Agriculture University
+    <div className="min-h-screen flex flex-col mt-10 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <div className="mt-10">
+        <Navbar />
+      </div>
+      {/* 🎥 Hero Section with Smooth Video Transition */}
+      <section className="relative w-full h-[500px] overflow-hidden">
+        {/* 🔹 Video Background Layer */}
+        <div className="absolute inset-0">
+          {videoClips.map((video, index) => (
+            <video
+              key={index}
+              src={video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-in-out ${
+                index === currentVideo ? "opacity-100 z-10" : "opacity-0 z-0"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* 🔹 Overlay Content Layer (Always on Top) */}
+        <div className="absolute inset-0 z-20 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+            Final Year Project Management System
+          </h2>
+          <p className="mt-2 max-w-2xl text-lg drop-shadow-md">
+            Empowering students and supervisors to manage, track, and evaluate
+            FYP progress with ease and transparency.
+          </p>
+          {/* <button
+            onClick={() => setIsLoginModalOpen(true)}
+            className="mt-6 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg text-white font-medium transition-colors shadow-lg"
+          >
+            Get Started
+          </button> */}
+        </div>
+      </section>
+      {/* 🔹 Main Content */}
+      <main className="flex-1 w-full mx-auto mt-20  space-y-12">
+        {/* Overview Section */}
+        <section id="overview" className="text-center">
+          <h3 className="text-3xl font-bold text-green-700 mb-2 relative inline-block">
+            Overview
+          </h3>
+
+          <p className="text-gray-700 dark:text-gray-300 text-justify leading-relaxed max-w-5xl mx-auto  mt-4">
+            Final Year Projects (FYP) at the University Institute of Information
+            Technology (UIIT), PMAS-Arid Agriculture University Rawalpindi, are
+            mandatory, team-based research and development undertakings
+            initiated after the completion of six semesters. Each group is led
+            by a designated leader to ensure effective coordination and project
+            management. Supervisors and co-supervisors are formally assigned to
+            provide academic and technical mentorship throughout the project
+            lifecycle. FYP topics are finalized through mutual consultation
+            between students and supervisors, ensuring alignment with emerging
+            technologies and industry needs. These projects aim to cultivate
+            professional competence, research aptitude, and innovative
+            problem-solving skills among students. Regular evaluations,
+            documentation, and presentations ensure continuous progress
+            monitoring and quality assurance. The FYP serves as a capstone
+            experience, bridging academic learning with real-world application
+            and professional practice.
+          </p>
+        </section>
+        <section
+          id="director-message"
+          className="py-20 px-6 md:px-16 bg-gradient-to-b from-white to-green-50 dark:from-gray-900 dark:to-gray-800"
+        >
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            {/* 🧑‍🏫 Left Side — Text */}
+            <div className="flex-1">
+              <h2 className="text-4xl font-extrabold text-green-700 mb-6 relative inline-block">
+                Message of the Director
+                <span className="block h-1 bg-green-600 mt-2 w-28 animate-[growLine_1s_ease-in-out_forwards] rounded-full"></span>
+              </h2>
+
+              <div className="space-y-5 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+                <p>
+                  At the University Institute of Information Technology (UIIT),
+                  Final Year Projects (FYPs) represent the culmination of our
+                  students’ academic journey. These projects showcase their
+                  technical skills, creativity, and ability to solve real-world
+                  problems. We consider the FYP a vital component of
+                  experiential learning—allowing students to apply classroom
+                  knowledge to practical challenges under the mentorship of our
+                  experienced faculty. Our framework encourages innovation,
+                  research, and industry relevance, with a strong emphasis on
+                  developing IT-based solutions that contribute to societal and
+                  industrial growth. Through their FYPs, students gain valuable
+                  experience in teamwork, leadership, and project management,
+                  preparing them for professional success in the tech world.
+                </p>
+              </div>
+
+              {/* 🖋️ Signature */}
+              <div className="mt-10  w-full ">
+                <div className="flex justify-end ">
+                  <div>
+                    <h1 className="text-black font-bold">Dr. Yaser Hafeez</h1>
+                    <p className="text-black font-bold">Professor / Director</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 🖼️ Right Side — Director’s Image */}
+            <div className="flex-1 flex justify-center">
+              <img
+                src="./director.jpeg"
+                alt="Director of UIIT"
+                className="w-[400px] h-[480px] object-cover rounded-2xl shadow-xl hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </div>
+        </section>
+        <section
+          id="fyp-registration"
+          className="relative bg-fixed w-full bg-center bg-cover py-24 px-6 md:px-12"
+          style={{
+            backgroundImage: "url('./assets/ariduni.jpeg')",
+          }}
+        >
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/60"></div>
+
+          <div className="relative w-full  text-white">
+            {/* Heading */}
+            <h2 className="text-4xl font-extrabold text-green-400 mb-4 relative inline-block">
+              FYP Registration
+              <span className="block h-1 bg-green-500 mt-2 w-24 animate-[growLine_1s_ease-in-out_forwards] rounded-full"></span>
+            </h2>
+
+            <p className="text-gray-200 mt-3 text-lg leading-relaxed max-w-3xl">
+              For FYP-I registration, students must meet the eligibility
+              criteria and form a group of 2 to 3 members from the same
+              department. Each group must have an internal supervisor from UIIT,
+              even if working with an external supervisor. The registration form
+              must be signed by the internal supervisor, as only their approval
+              validates the FYP registration.
+            </p>
+
+            {/* Registration Rules */}
+            <div className="mt-10 backdrop-blur-md bg-white/10 p-6 rounded-2xl border border-white/20 shadow-lg">
+              <h3 className="text-2xl font-semibold text-green-400 flex items-center gap-2 mb-4">
+                <i className="fa-solid fa-scroll text-green-400 text-xl"></i>
+                Important Guidelines for Project Selection:
+              </h3>
+
+              <ul className="list-disc pl-6 space-y-4 text-gray-50 dark:text-gray-300 leading-relaxed text-md">
+                <li>
+                  The project (web, mobile, or industrial) must be based on an
+                  <b> innovative idea</b> — not just a simple{" "}
+                  <b>CRUD application</b>.
+                </li>
+                <li>
+                  Projects involving <b>research and development (R&D)</b> are
+                  allowed, but <b>research work is not mandatory</b> for the
+                  FYP.
+                </li>
+                <li>
+                  The project should have a <b>wide enough scope</b> to justify
+                  a<b> year-long effort</b> and <b>6 credit hours</b>. Provide
+                  enough detail in your proposal to estimate this effort.
+                </li>
+                <li>
+                  Proposed products must be <b>realistic</b> and{" "}
+                  <b>applicable</b> in real-world scenarios.
+                </li>
+                <li>
+                  The project must be <b>original</b> — it should not repeat an
+                  existing or completed project.
+                </li>
+                <li>
+                  If you are <b>extending a previous project</b>, clearly
+                  mention:
+                  <ul className="list-disc pl-8 mt-2 space-y-1">
+                    <li>What the previous team did.</li>
+                    <li>What improvements or extensions you plan to make.</li>
+                  </ul>
+                </li>
+                <li>
+                  Projects must comply with the <b>rules and regulations</b> for
+                  students and faculty, as provided on the official{" "}
+                  <b>FYP website</b>.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section
+          id="position-holders"
+          className="relative  w-full py-20 px-6 md:px-12 bg-gradient-to-b from-white to-green-50 dark:from-gray-900 dark:to-gray-800"
+        >
+          {/* 🔹 Header */}
+          <div className="max-w-6xl mx-auto text-center mb-14">
+            <h2 className="text-4xl font-extrabold text-green-700 dark:text-green-400 mb-3">
+              Position Holders in Computer Science (FYP II)
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Celebrating the remarkable achievements of our talented students
+              whose Final Year Projects demonstrate innovation, skill, and
+              dedication.
             </p>
           </div>
-        </div>
-        <nav className="flex gap-8 font-medium text-green-700">
-          <a
-            href="https://www.uaar.edu.pk/uiit/faculty.php?dept_id=31"
-            target="_blank"
-            className="hover:text-green-900 hover:underline"
-          >
-            FACULTY
-          </a>
-          <a
-            href="https://www.uaar.edu.pk/uiit/programs.php?dept_id=31"
-            target="_blank"
-            className="hover:text-green-900 hover:underline"
-          >
-            PROGRAMS
-          </a>
-          <a
-            href="https://www.uaar.edu.pk/uiit/downloads.php?dept_id=31"
-            target="_blank"
-            className="hover:text-green-900 hover:underline"
-          >
-            RESEARCH
-          </a>
-        </nav>
-      </header>
 
-      <div className="flex flex-1">
-        {/* Sidebar */}
-        <aside className="w-72 bg-white border-r min-h-screen flex flex-col">
-          {/* Login buttons sticky at top */}
-          <div className="p-4 space-y-2 border-b sticky top-0 bg-white z-40">
-            <button
-              onClick={() => handleLogin("student")}
-              className="w-full flex items-center justify-center gap-2 py-2 rounded bg-green-600 text-white hover:bg-green-700"
-            >
-              <User className="w-5 h-5" /> Student
-            </button>
-            <button
-              onClick={() => handleLogin("super-admin")}
-              className="w-full flex items-center justify-center gap-2 py-2 rounded bg-gray-700 text-white hover:bg-gray-800"
-            >
-              <ClipboardList className="w-5 h-5" /> Coordinator
-            </button>
-            <button
-              onClick={() => handleLogin("supervisor")}
-              className="w-full flex items-center justify-center gap-2 py-2 rounded bg-green-700 text-white hover:bg-green-800"
-            >
-              <Users className="w-5 h-5" /> Supervisor
-            </button>
+          {/* 🔸 CS Cards */}
+          <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            {/* 1st Position */}
+            <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden border-t-4 border-yellow-400 hover:scale-105 transition-transform duration-700">
+              <img
+                src="./cs1.jpeg"
+                alt="GANs Project"
+                className="w-full h-52 object-cover"
+              />
+              <div className="p-6">
+                <div className="absolute top-0 right-0 bg-yellow-400 text-white px-4 py-1 rounded-bl-xl font-bold">
+                  1st Position
+                </div>
+                <h3 className="text-xl font-bold text-green-700 mb-2">
+                  Verti Nutrient System
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">
+                  <b>Supervisor:</b> Mr. Ahsan Arshad Abbasi
+                </p>
+                <ul className="text-gray-600 dark:text-gray-400 text-sm space-y-1">
+                  <li>FA21-BCS-001 Haider Abbas</li>
+                  <li>FA21-BCS-109 Ahmed Hassan Tariq</li>
+                  <li>FA21-BCS-136 Zaid Asghar Virk</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 2nd Position */}
+            <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden border-t-4 border-gray-400 hover:scale-105 transition-transform duration-700">
+              <img
+                src="./cs2.jpeg"
+                alt="Dispatch System"
+                className="w-full h-52 object-cover"
+              />
+              <div className="p-6">
+                <div className="absolute top-0 right-0 bg-gray-400 text-white px-4 py-1 rounded-bl-xl font-bold">
+                  2nd Position
+                </div>
+                <h3 className="text-xl font-bold text-green-700 mb-2">
+                  Multi-Tenant Hyper Market Dispatching System
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">
+                  <b>Supervisor:</b> Mr. M. Usman Akram
+                </p>
+                <ul className="text-gray-600 dark:text-gray-400 text-sm space-y-1">
+                  <li>FA21-BCS-079 M Numan Qamar</li>
+                  <li>FA21-BCS-046 M Zain</li>
+                  <li>FA21-BCS-139 Hirra Zahid</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 3rd Position */}
+            <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden border-t-4 border-amber-700 hover:scale-105 transition-transform duration-700">
+              <img
+                src="/cs3.jpeg"
+                alt="Deal Hunter"
+                className="w-full h-52 object-cover"
+              />
+              <div className="p-6">
+                <div className="absolute top-0 right-0 bg-amber-700 text-white px-4 py-1 rounded-bl-xl font-bold">
+                  3rd Position
+                </div>
+                <h3 className="text-xl font-bold text-green-700 mb-2">
+                  Deal Hunter
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">
+                  <b>Supervisor:</b> Mr. Zaheer Ahmad Gondal
+                </p>
+                <ul className="text-gray-600 dark:text-gray-400 text-sm space-y-1">
+                  <li>FA21-BCS-140 Musa Raza</li>
+                  <li>FA21-BCS-103 Marhaba Eman</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          {/* Navigation */}
-          <nav className="flex flex-col p-4 space-y-2 flex-1 overflow-y-auto">
-            {navItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => setSelected(item)}
-                className={`w-full text-left px-4 py-2 rounded transition ${
-                  selected === item
-                    ? "bg-green-600 text-white font-semibold"
-                    : "text-green-700 hover:bg-green-100"
-                }`}
-              >
-                {item}
-              </button>
-            ))}
-          </nav>
-        </aside>
+          {/* 🔹 Divider for SE Section */}
+          <div className="mt-20 text-center">
+            <h2 className="text-3xl font-bold text-green-700 dark:text-green-400 inline-block border-b-4 border-green-500 pb-1">
+              🧠 Position Holders in Software Engineering (FYP II)
+            </h2>
+          </div>
 
-        {/* Main Content */}
-        <main className="flex-1 p-8 overflow-y-auto">
-          {contentMap[selected]}
-        </main>
-      </div>
+          {/* 🔸 SE Cards */}
+          <div className="grid md:grid-cols-3 gap-10 mt-12 max-w-6xl mx-auto">
+            {/* 1st Position */}
+            <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden border-t-4 border-yellow-400 hover:scale-105 transition-transform duration-700">
+              <img
+                src="./se1.jpeg"
+                alt="AI Chatbot"
+                className="w-full h-52 object-cover"
+              />
+              <div className="p-6">
+                <div className="absolute top-0 right-0 bg-yellow-400 text-white px-4 py-1 rounded-bl-xl font-bold">
+                  1st Position
+                </div>
+                <h3 className="text-xl font-bold text-green-700 mb-2">
+                  AI-Powered Chatbot for Academic Support
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">
+                  <b>Supervisor:</b> Dr. Ayesha Saeed
+                </p>
+                <ul className="text-gray-600 dark:text-gray-400 text-sm space-y-1">
+                  <li>FA21-BSE-022 Ahsan Raza</li>
+                  <li>FA21-BSE-030 Mahnoor Fatima</li>
+                  <li>FA21-BSE-058 Zainab Tariq</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 2nd Position */}
+            <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden border-t-4 border-gray-400 hover:scale-105 transition-transform duration-700">
+              <img
+                src="se2.jpeg"
+                alt="Blockchain System"
+                className="w-full h-52 object-cover"
+              />
+              <div className="p-6">
+                <div className="absolute top-0 right-0 bg-gray-400 text-white px-4 py-1 rounded-bl-xl font-bold">
+                  2nd Position
+                </div>
+                <h3 className="text-xl font-bold text-green-700 mb-2">
+                  Blockchain-Based Attendance Management
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">
+                  <b>Supervisor:</b> Mr. Bilal Ahmed
+                </p>
+                <ul className="text-gray-600 dark:text-gray-400 text-sm space-y-1">
+                  <li>FA21-BSE-004 Hamza Iqbal</li>
+                  <li>FA21-BSE-078 Eman Tariq</li>
+                  <li>FA21-BSE-089 Saif Ul Islam</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 3rd Position */}
+            <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden border-t-4 border-amber-700 hover:scale-105 transition-transform duration-700">
+              <img
+                src="./se3.jpeg"
+                alt="Smart Campus"
+                className="w-full h-52 object-cover"
+              />
+              <div className="p-6">
+                <div className="absolute top-0 right-0 bg-amber-700 text-white px-4 py-1 rounded-bl-xl font-bold">
+                  3rd Position
+                </div>
+                <h3 className="text-xl font-bold text-green-700 mb-2">
+                  Smart Campus Automation System
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-3">
+                  <b>Supervisor:</b> Ms. Fatima Zahra
+                </p>
+                <ul className="text-gray-600 dark:text-gray-400 text-sm space-y-1">
+                  <li>FA21-BSE-060 Ameer Hamza</li>
+                  <li>FA21-BSE-045 Rimsha Iqbal</li>
+                  <li>FA21-BSE-010 Danish Khan</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <Footer />
+      </main>
     </div>
   );
 }

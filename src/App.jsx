@@ -35,15 +35,32 @@ import SupervisorAssignments from "./Pages/Supervisors/Assignmensts";
 import StudentGroups from "./Pages/Supervisors/Groups";
 import SupervisorAnnouncements from "./Pages/Supervisors/Addannoucements";
 import SupervisorEvaluator from "./Pages/Supervisors/Evealuator-results";
+import DistinguishedFYPs from "./Components/Distingfyp";
+import FypIdeas from "./Components/Ideasforstudent";
+import ImportantDates from "./Components/Dates";
+import RulesAndSOP from "./Components/Roules ";
+import DownloadsPage from "./Components/Downloads";
 
 function Layout() {
   const location = useLocation();
   const role = localStorage.getItem("role"); // role persist from localStorage
 
-  if (location.pathname === "/") {
+  if (
+    location.pathname === "/" ||
+    location.pathname === "/distinguished-fyp" ||
+    location.pathname === "/fyp-ideas" ||
+    location.pathname === "/key-dates" ||
+    location.pathname === "/rules-and-sops" ||
+    location.pathname === "/downloads"
+  ) {
     return (
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/distinguished-fyp" element={<DistinguishedFYPs />} />
+        <Route path="/fyp-ideas" element={<FypIdeas />} />
+        <Route path="/key-dates" element={<ImportantDates />} />
+        <Route path="/rules-and-sops" element={<RulesAndSOP />} />
+        <Route path="/downloads" element={<DownloadsPage />} />
       </Routes>
     );
   }
