@@ -241,7 +241,7 @@ const DistinguishedFYPs = () => {
 
   return (
     <div>
-      <section className="h-screen py-20 bg-gradient-to-br from-green-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <section className="h-screen  bg-gradient-to-br from-green-50 to-white dark:from-gray-900 dark:to-gray-800">
         <div className="max-full mx-auto">
           <Navbar />
 

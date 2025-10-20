@@ -36,7 +36,7 @@ const ImportantDates = () => {
   ];
 
   return (
-    <div className="h-screen bg-gradient-to-b mt-20 from-green-50 via-white to-green-100 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-200">
+    <div className="h-screen bg-gradient-to-b  from-green-50 via-white to-green-100 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-200">
       <Navbar />
       {/* Header */}
       <header className="bg-green-700 mt-14 text-white py-6 shadow-md">

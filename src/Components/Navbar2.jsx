@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const navigate = useNavigate();
 
-  // Dummy handler (for now)
+  // Single handleLogin function
   const handleLogin = (role) => {
+    localStorage.setItem("role", role);
+    if (role === "student") navigate("/student/dashboard");
+    else if (role === "coordinator")
+      navigate("/dashboard"); // Changed from "super-admin" to "coordinator"
+    else if (role === "supervisor") navigate("/supervisor/dashboard");
     setIsLoginModalOpen(false);
   };
 
@@ -15,21 +21,22 @@ const Navbar = () => {
       <div className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
           {/* University Info */}
-          <Link to="/" className="hover:text-yellow-300 transition-colors">
-            <div className="flex items-center gap-3">
-              <img
-                src="./img.png"
-                alt="University Logo"
-                className="h-14 w-14 object-contain"
-              />
-              <div>
-                <h1 className="text-lg font-bold text-green-700">
-                  University and Institute of Information Technology
-                </h1>
-                <p className="text-xs text-gray-600 dark:text-gray-400">
-                  Department of Computer Science
-                </p>
-              </div>
+          <Link
+            to="/"
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+          >
+            <img
+              src="./img.png"
+              alt="University Logo"
+              className="h-14 w-14 object-contain"
+            />
+            <div>
+              <h1 className="text-lg font-bold text-green-700">
+                University and Institute of Information Technology
+              </h1>
+              <p className="text-xs text-gray-600 dark:text-gray-400">
+                Department of Computer Science
+              </p>
             </div>
           </Link>
 
@@ -42,11 +49,11 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-
       {/* Spacer for fixed top header */}
-
+      <div className="h-20"></div>{" "}
+      {/* Added spacer to prevent content from being hidden under fixed header */}
       {/* 🔹 Navigation Bar (NOT fixed) */}
-      <header className="bg-green-700  text-white py-3 shadow-md">
+      <header className="bg-green-700 text-white py-3 shadow-md">
         <div className="max-w-6xl mx-auto px-4">
           <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
             <Link
@@ -82,7 +89,6 @@ const Navbar = () => {
           </nav>
         </div>
       </header>
-
       {/* 🔸 Login Modal */}
       {isLoginModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[100] p-4">
@@ -91,7 +97,7 @@ const Navbar = () => {
               <h3 className="text-2xl font-bold text-green-700">Login</h3>
               <button
                 onClick={() => setIsLoginModalOpen(false)}
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-xl"
               >
                 ✕
               </button>

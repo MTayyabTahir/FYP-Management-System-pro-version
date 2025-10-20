@@ -39,7 +39,7 @@ const downloads = [
 const DownloadsPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-white dark:from-gray-900 dark:to-gray-800 text-gray-900  dark:text-gray-100">
-      <div className="mt-20">
+      <div className="">
         <Navbar />
       </div>
       {/* Page header */}

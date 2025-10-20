@@ -4,7 +4,7 @@ import Navbar from "./Navbar2";
 
 const RulesAndSOP = () => {
   return (
-    <div className="bg-gray-50 h-screen mt-20 text-gray-800">
+    <div className="bg-gray-50 h-screen  text-gray-800">
       <Navbar />
       <header className="bg-green-700 text-white mt-10 py-8 text-center">
         <h1 className="text-3xl font-bold uppercase">
