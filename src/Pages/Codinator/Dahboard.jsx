@@ -36,7 +36,7 @@ export default function Dashboard() {
   // Stats data
   const stats = [
     {
-      label: "Total Students",
+      label: "Total Enrolled Students",
       value: 450,
       icon: <GraduationCap className="w-8 h-8 text-emerald-600" />,
     },
@@ -146,8 +146,12 @@ export default function Dashboard() {
             className="p-6 rounded-2xl shadow-md bg-white border border-gray-100 flex flex-col items-center hover:shadow-lg transition"
           >
             {stat.icon}
-            <p className="text-sm text-gray-600 mt-2">{stat.label}</p>
-            <h2 className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</h2>
+            <p className="text-sm text-center text-gray-600 mt-2">
+              {stat.label}
+            </p>
+            <h2 className="text-2xl font-bold text-gray-900 mt-1">
+              {stat.value}
+            </h2>
           </div>
         ))}
       </div>

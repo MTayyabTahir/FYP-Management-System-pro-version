@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import img from "/assets/arid.png";
 
 export default function Sidebar({ links = [] }) {
@@ -12,11 +13,13 @@ export default function Sidebar({ links = [] }) {
       <aside className="hidden md:flex fixed top-0 left-0 h-screen w-64 bg-green-800 text-white shadow-lg flex-col border-r border-green-700">
         {/* Logo Section */}
         <div className="flex flex-col items-center py-6 border-b border-green-700">
-          <img
-            src={img}
-            alt="University Logo"
-            className="h-24 w-24 rounded-lg bg-white p-2 shadow-md"
-          />
+          <Link to="/">
+            <img
+              src={img}
+              alt="University Logo"
+              className="h-20 w-20 rounded-lg bg-white p-2 shadow-md"
+            />
+          </Link>
           <h1 className="mt-2 text-xl font-semibold text-white text-center">
             PMAS AAUR
           </h1>

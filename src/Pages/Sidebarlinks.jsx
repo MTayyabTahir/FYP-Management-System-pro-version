@@ -29,6 +29,11 @@ export const superAdminLinks = [
     icon: <Megaphone size={18} />,
   },
   {
+    path: "/cordinator/proposalevaluator",
+    label: "Proposal Evaluator",
+    icon: <ClipboardCheck size={18} />,
+  },
+  {
     path: "/cordinator/evaluator",
     label: "Evaluator Assignment",
     icon: <ClipboardCheck size={18} />,
@@ -72,9 +77,15 @@ export const Supervisor = [
   },
   {
     path: "/supervisor/assignments",
-    label: "Assignments",
+    label: "Proposal Requests",
     icon: <Users size={18} />,
   },
+  {
+    path: "/supervisor/Propsal",
+    label: "Proposal Review pannel",
+    icon: <FileText size={18} />,
+  },
+
   { path: "/supervisor/groups", label: "Groups", icon: <FileText size={18} /> },
   {
     path: "/supervisor/evaluator-result",

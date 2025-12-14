@@ -5,14 +5,17 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
+
 import Sidebar from "./Components/Sidebar";
 import Navbar from "./Components/Navbar";
+
 import {
   superAdminLinks,
   studentLinks,
   Supervisor,
 } from "./Pages/Sidebarlinks";
 
+// Coordinator Pages
 import Dashboard from "./Pages/Codinator/Dahboard";
 import SupervisorList from "./Pages/Codinator/Supervisorlist";
 import StudentList from "./Pages/Codinator/Studentdata";
@@ -22,7 +25,7 @@ import SupervisorProfile from "./Pages/Codinator/Supervisor-profile";
 import CoordinatorProfile from "./Pages/Codinator/Cordinator-profile";
 import FypMarksTable from "./Pages/Codinator/Result";
 
-import LoginPage from "./Components/Login";
+// Student Pages
 import StudentDashboard from "./Pages/Student/Student-dashboard";
 import AssignmentsPage from "./Pages/Student/Assignments_submit";
 import StudentSupervisors from "./Pages/Student/Student_supervisor";
@@ -30,21 +33,34 @@ import SupervisorProfileWithPlagiarism from "./Pages/Student/Supervisor_profile"
 import StudentResult from "./Pages/Student/Student-result";
 import StudentGroupmates from "./Pages/Student/Student-group";
 
+// Supervisor Pages
 import SupervisorDashboard from "./Pages/Supervisors/Dashboard";
 import SupervisorAssignments from "./Pages/Supervisors/Assignmensts";
 import StudentGroups from "./Pages/Supervisors/Groups";
 import SupervisorAnnouncements from "./Pages/Supervisors/Addannoucements";
 import SupervisorEvaluator from "./Pages/Supervisors/Evealuator-results";
+
+// Public Pages
 import DistinguishedFYPs from "./Components/Distingfyp";
 import FypIdeas from "./Components/Ideasforstudent";
 import ImportantDates from "./Components/Dates";
 import RulesAndSOP from "./Components/Roules ";
 import DownloadsPage from "./Components/Downloads";
 
+// Login
+import LoginPage from "./Components/Login";
+import LoginPage2 from "./Components/Login2";
+import Projectpannel from "./Pages/Supervisors/Proposalpannel";
+import Proposalevelauator from "./Pages/Codinator/Proposalevealuator";
+
 function Layout() {
   const location = useLocation();
-  const role = localStorage.getItem("role"); // role persist from localStorage
+  const role = localStorage.getItem("role");
 
+  // ✅ SIMPLE CHECK
+  const isLoginPage = location.pathname === "/login";
+
+  // ✅ Public pages (NO sidebar, NO navbar)
   if (
     location.pathname === "/" ||
     location.pathname === "/distinguished-fyp" ||
@@ -65,23 +81,32 @@ function Layout() {
     );
   }
 
-  if (!role) {
+  // 🔐 Protected pages (except /login)
+  if (!role && !isLoginPage) {
     return <Navigate to="/" replace />;
   }
 
   let links = [];
-  if (role === "super-admin") links = superAdminLinks;
+  if (role === "super-admins") links = superAdminLinks;
   else if (role === "student") links = studentLinks;
   else if (role === "supervisor") links = Supervisor;
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar links={links} />
+      {/* ❌ Sidebar hide on /login */}
+      {!isLoginPage && <Sidebar links={links} />}
+
       <div className="flex-1 flex flex-col">
-        <Navbar />
+        {/* ❌ Navbar hide on /login */}
+        {!isLoginPage && <Navbar />}
+
         <main className="p-6 bg-gray-100 flex-1">
           <Routes>
-            {role === "super-admin" && (
+            {/* LOGIN */}
+            <Route path="/login" element={<LoginPage2 />} />
+
+            {/* COORDINATOR */}
+            {role === "super-admins" && (
               <>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route
@@ -95,6 +120,10 @@ function Layout() {
                   element={<EvaluatorAssignment />}
                 />
                 <Route
+                  path="/cordinator/proposalevaluator"
+                  element={<Proposalevelauator />}
+                />
+                <Route
                   path="/coordinator/supervisor-profile"
                   element={<SupervisorProfile />}
                 />
@@ -106,6 +135,7 @@ function Layout() {
               </>
             )}
 
+            {/* STUDENT */}
             {role === "student" && (
               <>
                 <Route
@@ -131,6 +161,8 @@ function Layout() {
                 />
               </>
             )}
+
+            {/* SUPERVISOR */}
             {role === "supervisor" && (
               <>
                 <Route
@@ -146,6 +178,7 @@ function Layout() {
                   path="/supervisor/add-annnoucements"
                   element={<SupervisorAnnouncements />}
                 />
+                <Route path="/supervisor/Propsal" element={<Projectpannel />} />
                 <Route
                   path="/supervisor/evaluator-result"
                   element={<SupervisorEvaluator />}
@@ -158,6 +191,7 @@ function Layout() {
     </div>
   );
 }
+
 export default function App() {
   return (
     <Router>

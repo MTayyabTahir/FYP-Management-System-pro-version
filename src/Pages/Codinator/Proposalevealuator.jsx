@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as XLSX from "xlsx";
 
-export default function EvaluatorAssignment() {
+export default function Proposalevelauator() {
   const [supervisors] = useState([
     "Dr. Yaser Hafeez",
     "Dr. Saif Ur Rehman",
@@ -30,12 +30,9 @@ export default function EvaluatorAssignment() {
 
   // Add assignment
   const handleAddAssignment = () => {
-    if (!selectedSupervisor || !et1 || !et2) return;
+    if (!selectedSupervisor || !et1) return;
 
-    setAssignments([
-      ...assignments,
-      { supervisor: selectedSupervisor, et1, et2 },
-    ]);
+    setAssignments([...assignments, { supervisor: selectedSupervisor, et1 }]);
 
     // Reset selections
     setSelectedSupervisor("");
@@ -56,7 +53,7 @@ export default function EvaluatorAssignment() {
   return (
     <div className="ml-64 p-6 bg-gray-50 min-h-screen">
       <h2 className="text-3xl font-bold text-green-700 mb-6">
-        📝 Evaluator Assignment
+        Evaluator Assignment for Proposal
       </h2>
 
       {/* Supervisor Select */}
@@ -104,7 +101,7 @@ export default function EvaluatorAssignment() {
               </select>
             </div>
 
-            <div>
+            {/* <div>
               <label className="block text-sm font-medium mb-1">ET-2</label>
               <select
                 value={et2}
@@ -120,7 +117,7 @@ export default function EvaluatorAssignment() {
                     </option>
                   ))}
               </select>
-            </div>
+            </div> */}
           </div>
 
           <button
@@ -136,11 +133,11 @@ export default function EvaluatorAssignment() {
       {assignments.length > 0 && (
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-x-auto">
           <table className="w-full text-left text-gray-700 min-w-[500px]">
-            <thead className="bg-green-100 text-green-700 uppercase text-sm font-semibold">
+            <thead className="bg-green-100 w-full  text-green-700 uppercase text-sm font-semibold">
               <tr>
                 <th className="px-6 py-3">Supervisor</th>
                 <th className="px-6 py-3">ET-1</th>
-                <th className="px-6 py-3">ET-2</th>
+                <th className="px-6 py-3"></th>
               </tr>
             </thead>
             <tbody>
