@@ -1,186 +1,137 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-/**
- * Hardcoded credentials mapping roles to username/password for demonstration.
- * In a real application, this would be an API call and roles would be more granular.
- */
-const DEMO_CREDENTIALS = {
-  student: {
-    username: "student",
-    password: "stud123",
-    redirect: "/student/dashboard",
-    roleKey: "student",
-  },
-  coordinator: {
-    username: "coordinator",
-    password: "coord123",
-    redirect: "/dashboard",
-    roleKey: "super-admins",
-  },
-  supervisor: {
-    username: "supervisor",
-    password: "super123",
-    redirect: "/supervisor/dashboard",
-    roleKey: "supervisor",
-  },
-};
-
-const LoginPage = () => {
+const LoginPage2 = () => {
   const navigate = useNavigate();
 
-  // State for form inputs and UI feedback
-  const [loginRole, setLoginRole] = useState("student");
-  const [inputUsername, setInputUsername] = useState("");
-  const [inputPassword, setInputPassword] = useState("");
-  const [loginError, setLoginError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false); // To disable button during submission
+  // Hardcoded credentials for FYP Management System
+  const credentials = {
+    student: { username: "student", password: "stud123" },
+    coordinator: { username: "coordinator", password: "coord123" },
+    supervisor: { username: "supervisor", password: "super123" },
+  };
 
-  /**
-   * Handles the login process.
-   * In a real application, this would involve async communication with a backend API.
-   * @param {React.FormEvent} e - The form submission event.
-   */
+  const [role, setRole] = useState("student");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
   const handleLogin = (e) => {
     e.preventDefault();
-    setLoginError(""); // Clear previous errors
-    setIsSubmitting(true);
+    setError("");
 
-    // Simulate Network Delay (Optional, for better UX feedback)
-    setTimeout(() => {
-      const selectedCredential = DEMO_CREDENTIALS[loginRole];
+    const selected = credentials[role];
 
-      if (
-        inputUsername === selectedCredential.username &&
-        inputPassword === selectedCredential.password
-      ) {
-        // Successful Login: Store role and navigate
-        localStorage.setItem("userRole", selectedCredential.roleKey);
-        navigate(selectedCredential.redirect);
-      } else {
-        // Failed Login
-        setLoginError("Invalid username or password for the selected role.");
-        setIsSubmitting(false); // Re-enable button
+    if (username === selected.username && password === selected.password) {
+      if (role === "coordinator") {
+        localStorage.setItem("role", "super-admins");
+        navigate("/dashboard");
       }
-    }, 500); // 500ms delay to simulate network latency
+      if (role === "supervisor") {
+        localStorage.setItem("role", "supervisor");
+        navigate("/supervisor/dashboard");
+      }
+      if (role === "student") {
+        localStorage.setItem("role", "student");
+        navigate("/student/dashboard");
+      }
+    } else {
+      setError("Invalid username or password");
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f4f7fb] p-4">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-2xl p-8 transition-all duration-300 ease-in-out">
-        <header className="mb-8">
-          <h1 className="text-3xl font-extrabold text-green-800 text-center mb-1">
-            FYP Management System
-          </h1>
-          <p className="text-center text-gray-500">
-            Securely access your account.
-          </p>
-        </header>
+    <div className="h-screen w-full m-[-20px]  p-20 flex items-center justify-center bg-green-100 px-4">
+      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+        {/* LEFT ILLUSTRATION */}
+        <div className="hidden md:flex items-center justify-center bg-green-200 ">
+          <img
+            src="./assets/ill.png"
+            alt="Login Illustration"
+            className="max-w-sm"
+          />
+        </div>
 
-        <form onSubmit={handleLogin} className="space-y-6">
-          {/* Role Selection */}
-          <div className="space-y-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-semibold text-gray-700"
-            >
-              Login As
-            </label>
-            <select
-              id="role"
-              value={loginRole}
-              onChange={(e) => {
-                setLoginRole(e.target.value);
-                setLoginError(""); // Clear error on role change
-              }}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 bg-white focus:ring-green-600 focus:border-green-600 outline-none transition-shadow"
-            >
-              <option value="student">Student</option>
-              <option value="coordinator">Coordinator</option>
-              <option value="supervisor">Supervisor</option>
-            </select>
-          </div>
-
-          {/* Username Input */}
-          <div className="space-y-1">
-            <label
-              htmlFor="username"
-              className="block text-sm font-semibold text-gray-700"
-            >
-              Username
-            </label>
-            <input
-              id="username"
-              type="text"
-              value={inputUsername}
-              onChange={(e) => setInputUsername(e.target.value)}
-              placeholder="Enter your username"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-green-600 focus:border-green-600 outline-none"
-              required
-              autoComplete="username"
+        {/* RIGHT LOGIN FORM */}
+        <div className="p-8 md:p-12">
+          <div className="text-center mb-6">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHkzF0LHPuBhUXzgYtqZVORAhjOe9E1LwLknSIQnHaqQ5PGPRuX4L3&usqp=CAE&s"
+              alt="University Logo"
+              className="h-14 mx-auto mb-2"
             />
+            <h2 className="text-2xl font-bold text-green-700">
+              FYP Management System
+            </h2>
+            <p className="text-sm text-gray-500">Login to continue</p>
           </div>
 
-          {/* Password Input */}
-          <div className="space-y-1">
-            <label
-              htmlFor="password"
-              className="block text-sm font-semibold text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              value={inputPassword}
-              onChange={(e) => setInputPassword(e.target.value)}
-              placeholder="Enter your password"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-green-600 focus:border-green-600 outline-none"
-              required
-              autoComplete="current-password"
-            />
-          </div>
-
-          {/* Error Message Display */}
-          {loginError && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-sm text-center">
-              {loginError}
+          <form onSubmit={handleLogin} className="space-y-4">
+            {/* Role */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Login As</label>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600 outline-none"
+              >
+                <option value="student">Student</option>
+                <option value="coordinator">Coordinator</option>
+                <option value="supervisor">Supervisor</option>
+              </select>
             </div>
-          )}
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-bold transition duration-200 ease-in-out shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isSubmitting ? "Logging in..." : "Login"}
-          </button>
-        </form>
+            {/* Username */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Username</label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter username"
+                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600 outline-none"
+                required
+              />
+            </div>
 
-        {/* Demo Credentials Section */}
-        <section className="mt-8 pt-4 border-t border-gray-200 text-sm text-gray-600">
-          <h3 className="font-bold text-gray-800 mb-2">
-            🔑 Demo Access Credentials
-          </h3>
-          <ul className="space-y-1 list-disc list-inside ml-2">
-            <li className="text-gray-600">
-              <span className="font-semibold">Student:</span> username `student`
-              / password `stud123`
-            </li>
-            <li className="text-gray-600">
-              <span className="font-semibold">Coordinator:</span> username
-              `coordinator` / password `coord123`
-            </li>
-            <li className="text-gray-600">
-              <span className="font-semibold">Supervisor:</span> username
-              `supervisor` / password `super123`
-            </li>
-          </ul>
-        </section>
+            {/* Password */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter password"
+                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600 outline-none"
+                required
+              />
+            </div>
+
+            {/* Error */}
+            {error && (
+              <p className="text-red-600 text-sm text-center">{error}</p>
+            )}
+
+            {/* Button */}
+            <button
+              type="submit"
+              className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold transition"
+            >
+              Login
+            </button>
+          </form>
+
+          {/* Demo Credentials */}
+          <div className="mt-6 text-xs text-gray-500 border-t pt-4">
+            <p className="font-semibold mb-1">Demo Credentials</p>
+            <p>Student: student / stud123</p>
+            <p>Coordinator: coordinator / coord123</p>
+            <p>Supervisor: supervisor / super123</p>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default LoginPage2;

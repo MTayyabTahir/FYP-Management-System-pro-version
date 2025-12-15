@@ -100,7 +100,7 @@ function Layout() {
         {/* ❌ Navbar hide on /login */}
         {!isLoginPage && <Navbar />}
 
-        <main className="p-6 bg-gray-100 flex-1">
+        <main className="p-6 bg-gray-100 flex-1 overflow-y-auto">
           <Routes>
             {/* LOGIN */}
             <Route path="/login" element={<LoginPage2 />} />
