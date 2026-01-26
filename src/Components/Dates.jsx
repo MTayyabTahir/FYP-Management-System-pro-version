@@ -36,10 +36,10 @@ const ImportantDates = () => {
   ];
 
   return (
-    <div className="h-screen bg-gradient-to-b  from-green-50 via-white to-green-100 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-200">
+    <div className="bg-gradient-to-br from-green-50 to-white dark:from-gray-900 dark:to-gray-800 ">
       <Navbar />
       {/* Header */}
-      <header className="bg-green-700 mt-14 text-white py-6 shadow-md">
+      {/* <header className="bg-green-700 mt-14 text-white py-6 shadow-md">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
           <h1 className="text-2xl md:text-3xl font-bold">
             PMAS Arid Agriculture University
@@ -48,12 +48,12 @@ const ImportantDates = () => {
             Department of Computer Science – FYP Portal
           </p>
         </div>
-      </header>
+      </header> */}
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-4 py-16">
         {/* Section Title */}
-        <h2 className="text-4xl font-extrabold text-green-800 dark:text-green-400 text-center mb-6">
+        <h2 className="text-4xl font-extrabold  dark:text-white text-center mb-6">
           Important Dates & Deliverables
         </h2>
         <p className="text-center text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
@@ -101,8 +101,8 @@ const ImportantDates = () => {
         </div>
 
         {/* Details Section */}
-        <section className="mt-16 bg-white/80 dark:bg-gray-900/70 border border-green-200 dark:border-gray-700 rounded-2xl shadow-lg p-8">
-          <h3 className="text-2xl font-bold text-green-700 dark:text-green-400 mb-4 flex items-center gap-2">
+        <section className="mt-16 b dark:bg-gray-900/70 border border-green-200 dark:border-gray-700 rounded-2xl shadow-lg p-8">
+          <h3 className="text-2xl font-bold  dark:text-white mb-4 flex items-center gap-2">
             <Info size={22} /> Details & Guidelines
           </h3>
           <ul className="list-disc pl-6 space-y-3 text-gray-700 dark:text-gray-300 leading-relaxed">

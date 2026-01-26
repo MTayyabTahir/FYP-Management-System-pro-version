@@ -19,7 +19,7 @@ ChartJS.register(
   ArcElement,
   CategoryScale,
   LinearScale,
-  BarElement
+  BarElement,
 );
 
 export default function SupervisorProfileWithPlagiarism() {
@@ -113,11 +113,11 @@ export default function SupervisorProfileWithPlagiarism() {
     p >= 70
       ? "bg-red-600 text-white"
       : p >= 40
-      ? "bg-yellow-400 text-black"
-      : "bg-green-600 text-white";
+        ? "bg-yellow-400 text-black"
+        : "bg-green-600 text-white";
 
   return (
-    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-green-50">
+    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-[#f4f7f5]">
       {/* Supervisor Header */}
       <div className="bg-white p-6 rounded-2xl shadow mb-6">
         <div className="flex flex-col md:flex-row gap-6 items-start">
@@ -144,7 +144,8 @@ export default function SupervisorProfileWithPlagiarism() {
                 {supervisor.description.qualification}
               </p>
               <p>
-                <strong>Areas of Interest:</strong> {supervisor.description.interests}
+                <strong>Areas of Interest:</strong>{" "}
+                {supervisor.description.interests}
               </p>
             </div>
 
@@ -274,7 +275,7 @@ export default function SupervisorProfileWithPlagiarism() {
               <div className="flex justify-between items-center mb-4">
                 <span
                   className={`px-3 py-1 rounded-full text-sm font-semibold ${badgeClass(
-                    plagPercent
+                    plagPercent,
                   )}`}
                 >
                   Similarity: {plagPercent}%

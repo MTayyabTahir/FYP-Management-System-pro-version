@@ -26,8 +26,8 @@ export default function StudentGroups() {
   ];
 
   return (
-    <div className="p-6 md:ml-64 pt-8  min-h-screen">
-      <h1 className="text-3xl font-bold text-green-800 mb-6">
+    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-gray-50">
+      <h1 className="text-3xl font-bold text-green-800 mb-8">
         My Groups & Projects
       </h1>
 
@@ -40,59 +40,72 @@ export default function StudentGroups() {
                 data: [group.progress, 100 - group.progress],
                 backgroundColor: [
                   group.progress < 50
-                    ? "#ef4444" // red
+                    ? "#ef4444"
                     : group.progress < 80
-                    ? "#f59e0b" // yellow
-                    : "#16a34a", // green
-                  "#e5e7eb", // gray background for remaining
+                      ? "#f59e0b"
+                      : "#16a34a",
+                  "#e5e7eb",
                 ],
-                borderWidth: 1,
+                borderWidth: 0,
               },
             ],
           };
 
           const options = {
-            cutout: "70%",
+            cutout: "75%",
             plugins: {
               legend: { display: false },
+              tooltip: { enabled: false },
             },
           };
 
           return (
             <div
               key={group.id}
-              className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition"
+              className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-6"
             >
-              {/* Group Header */}
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-gray-800">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-3">
+                <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
                   Group {group.id}
-                </h2>
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold">
-                  {group.project}
                 </span>
               </div>
 
+              {/* Project Name */}
+              <h2 className="text-lg font-bold text-gray-800 mb-4">
+                {group.project}
+              </h2>
+
               {/* Members */}
-              <div className="mb-4">
-                <h3 className="text-sm font-semibold text-gray-600 mb-2">
-                  Group Members:
-                </h3>
-                <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
+              <div className="mb-6">
+                <p className="text-sm font-semibold text-gray-500 mb-2">
+                  Group Members
+                </p>
+                <div className="flex flex-wrap gap-2">
                   {group.members.map((m, i) => (
-                    <li key={i}>{m}</li>
+                    <span
+                      key={i}
+                      className="text-xs px-3 py-1 rounded-full bg-gray-100 text-gray-700"
+                    >
+                      {m}
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
 
-              {/* Chart.js Doughnut Progress */}
-              <div className="flex flex-col items-center">
+              {/* Progress */}
+              <div className="flex items-center justify-center relative">
                 <div className="w-32 h-32">
                   <Doughnut data={data} options={options} />
                 </div>
-                <p className="mt-2 text-sm text-gray-500">
-                  {group.progress}% Completed
-                </p>
+
+                {/* Center Percentage */}
+                <div className="absolute text-center">
+                  <p className="text-2xl font-bold text-gray-800">
+                    {group.progress}%
+                  </p>
+                  <p className="text-xs text-gray-500">Completed</p>
+                </div>
               </div>
             </div>
           );

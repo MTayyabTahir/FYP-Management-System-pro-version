@@ -43,7 +43,7 @@ const DownloadsPage = () => {
         <Navbar />
       </div>
       {/* Page header */}
-      <header className="bg-green-700 text-white mt-10 py-6 shadow-md">
+      <header className="bg-primary text-white mt-10 py-6 shadow-md">
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
           <div>
             <h1 className="text-xl md:text-2xl font-bold">
@@ -59,7 +59,7 @@ const DownloadsPage = () => {
       {/* Content */}
       <main className="max-w-6xl mx-auto px-4 py-12">
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-green-800 dark:text-green-300">
+          <h2 className="text-3xl md:text-4xl font-extrabold  dark:text-white">
             Downloads
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mt-2">
@@ -79,9 +79,7 @@ const DownloadsPage = () => {
               className="bg-white dark:bg-gray-900 rounded-2xl shadow hover:shadow-lg transition p-5 flex flex-col justify-between"
             >
               <div>
-                <h3 className="text-lg font-semibold text-green-700 mb-1">
-                  {item.title}
-                </h3>
+                <h3 className="text-lg font-semibold  mb-1">{item.title}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
                   {item.desc}
                 </p>
@@ -97,7 +95,7 @@ const DownloadsPage = () => {
                 <a
                   href={item.filename}
                   download
-                  className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition"
+                  className="inline-flex items-center gap-2  hover:bg-primary text-primary hover:text-white border-2 border-primary px-4 py-2 rounded-lg font-medium transition"
                 >
                   <Download size={16} />
                   Download PDF

@@ -36,8 +36,8 @@ export default function Projectpannel() {
   const handleDecision = (groupId, decision, comment) => {
     setGroups((prev) =>
       prev.map((g) =>
-        g.id === groupId ? { ...g, status: decision, comment } : g
-      )
+        g.id === groupId ? { ...g, status: decision, comment } : g,
+      ),
     );
   };
 
@@ -58,8 +58,8 @@ export default function Projectpannel() {
                   group.progress < 50
                     ? "#ef4444"
                     : group.progress < 80
-                    ? "#f59e0b"
-                    : "#16a34a",
+                      ? "#f59e0b"
+                      : "#16a34a",
                   "#e5e7eb",
                 ],
                 borderWidth: 1,
@@ -84,10 +84,25 @@ export default function Projectpannel() {
                 <h2 className="text-xl font-bold text-gray-800">
                   Group {group.id}
                 </h2>
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold">
-                  {group.project}
-                </span>
+                <button
+                  onClick={() => {
+                    // Example: PDF file link (replace with actual proposal PDF URLs)
+                    const pdfUrl = `/pdfs/group_${group.id}_proposal.pdf`;
+                    const link = document.createElement("a");
+                    link.href = pdfUrl;
+                    link.download = `Group_${group.id}_Proposal.pdf`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="px-6 py-2 border-2 border-green-500 bg-white text-green-700 hover:text-white cursor-pointer rounded-lg hover:bg-green-700 transition"
+                >
+                  Download Proposal PDF
+                </button>
               </div>
+              <h1 className=" text-lg font-bold text-gray-800 ">
+                {group.project}
+              </h1>
 
               {/* Members */}
               <div className="mb-4">
@@ -103,7 +118,7 @@ export default function Projectpannel() {
 
               {/* Chart.js Doughnut Progress */}
               <div className="flex flex-col items-center mb-4">
-                <button
+                {/* <button
                   onClick={() => {
                     // Example: PDF file link (replace with actual proposal PDF URLs)
                     const pdfUrl = `/pdfs/group_${group.id}_proposal.pdf`;
@@ -114,10 +129,10 @@ export default function Projectpannel() {
                     link.click();
                     document.body.removeChild(link);
                   }}
-                  className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-700 transition"
+                  className="px-6 py-2 border-2 border-green-500 bg-white text-green-700 hover:text-white cursor-pointer rounded-lg hover:bg-green-700 transition"
                 >
                   Download Proposal PDF
-                </button>
+                </button> */}
               </div>
 
               {/* Accept / Reject Section */}
@@ -132,8 +147,8 @@ export default function Projectpannel() {
                         prev.map((g) =>
                           g.id === group.id
                             ? { ...g, comment: e.target.value }
-                            : g
-                        )
+                            : g,
+                        ),
                       )
                     }
                   ></textarea>

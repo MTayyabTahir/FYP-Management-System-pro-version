@@ -246,7 +246,7 @@ const DistinguishedFYPs = () => {
           <Navbar />
 
           {/* Page Header */}
-          <h1 className="text-5xl font-extrabold mt-12 text-green-700 text-center mb-4">
+          <h1 className="text-5xl font-extrabold mt-12 dark:text-white text-center mb-4">
             Distinguished Final Year Projects (FYPs)
           </h1>
           <p className="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
@@ -260,7 +260,7 @@ const DistinguishedFYPs = () => {
           {/* Table Container */}
           <div className="overflow-x-auto shadow-2xl rounded-2xl border border-gray-200 dark:border-gray-700 backdrop-blur-sm bg-white/80 dark:bg-gray-900/60">
             <table className="min-w-full border-collapse text-sm md:text-base">
-              <thead className="bg-green-700 text-white">
+              <thead className="bg-primary text-white">
                 <tr>
                   <th className="py-4 px-4 text-left">Project Title</th>
                   <th className="py-4 px-4 text-left">Supervisor(s)</th>
@@ -303,7 +303,7 @@ const DistinguishedFYPs = () => {
                     <td className="py-4 px-4 text-gray-700 dark:text-gray-300">
                       {proj.year}
                     </td>
-                    <td className="py-4 px-4 text-green-700 font-medium dark:text-green-400">
+                    <td className="py-4 px-4 text-primary font-medium dark:text-green-400">
                       {proj.distinction}
                     </td>
                   </tr>

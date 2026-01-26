@@ -20,10 +20,8 @@ export default function StudentResult() {
   ];
 
   return (
-    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-green-50">
-      <h1 className="text-3xl font-bold text-green-800 mb-6">
-        Student Result
-      </h1>
+    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-[#f4f7f5]">
+      <h1 className="text-3xl font-bold text-green-800 mb-6">Student Result</h1>
 
       {/* Student Info Card */}
       <div className="bg-white p-6 rounded-2xl shadow-lg mb-6">

@@ -55,7 +55,7 @@ export default function FypHomePage() {
 
         {/* 🔹 Overlay Content Layer (Always on Top) */}
         <div className="absolute inset-0 z-20 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+          <h2 className="text-3xl font-titillium md:text-5xl font-bold mb-4 drop-shadow-lg">
             Final Year Project Management System
           </h2>
           <p className="mt-2 max-w-2xl text-lg drop-shadow-md">
@@ -64,7 +64,7 @@ export default function FypHomePage() {
           </p>
           {/* <button
             onClick={() => setIsLoginModalOpen(true)}
-            className="mt-6 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg text-white font-medium transition-colors shadow-lg"
+            className="mt-6 px-6 py-3 bg-primary hover:bg-green-700 rounded-lg text-white font-medium transition-colors shadow-lg"
           >
             Get Started
           </button> */}
@@ -74,9 +74,10 @@ export default function FypHomePage() {
       <main className="flex-1 w-full mx-auto mt-20  space-y-12">
         {/* Overview Section */}
         <section id="overview" className="text-center">
-          <h3 className="text-3xl font-bold text-green-700 mb-2 relative inline-block">
+          <h2 className="text-4xl font-extrabold dark:text-white font-inter mb-6 relative inline-block">
             Overview
-          </h3>
+            <span className="block h-1 bg-primary mt-2 w-48 animate-[growLine_1s_ease-in-out_forwards] rounded-full"></span>
+          </h2>
 
           <p className="text-gray-700 dark:text-gray-300 text-justify leading-relaxed max-w-5xl mx-auto  mt-4">
             Final Year Projects (FYP) at the University Institute of Information
@@ -104,12 +105,12 @@ export default function FypHomePage() {
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
             {/* 🧑‍🏫 Left Side — Text */}
             <div className="flex-1">
-              <h2 className="text-4xl font-extrabold text-green-700 mb-6 relative inline-block">
+              <h2 className="text-4xl font-extrabold dark:text-white mb-6 relative inline-block">
                 Message of the Director
-                <span className="block h-1 bg-green-600 mt-2 w-28 animate-[growLine_1s_ease-in-out_forwards] rounded-full"></span>
+                <span className="block h-1 bg-primary mt-2 w-[435px] animate-[growLine_1s_ease-in-out_forwards] rounded-full"></span>
               </h2>
 
-              <div className="space-y-5 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+              <div className="space-y-5 text-gray-700 dark:text-gray-200 leading-relaxed text-lg">
                 <p>
                   At the University Institute of Information Technology (UIIT),
                   Final Year Projects (FYPs) represent the culmination of our
@@ -131,8 +132,12 @@ export default function FypHomePage() {
               <div className="mt-10  w-full ">
                 <div className="flex justify-end ">
                   <div>
-                    <h1 className="text-black font-bold">Dr. Yaser Hafeez</h1>
-                    <p className="text-black font-bold">Professor / Director</p>
+                    <h1 className="dark:text-white font-bold">
+                      Dr. Yaser Hafeez
+                    </h1>
+                    <p className="dark:text-white font-bold">
+                      Professor / Director
+                    </p>
                   </div>
                 </div>
               </div>
@@ -160,9 +165,9 @@ export default function FypHomePage() {
 
           <div className="relative w-full  text-white">
             {/* Heading */}
-            <h2 className="text-4xl font-extrabold text-green-400 mb-4 relative inline-block">
+            <h2 className="text-4xl font-extrabold text-white mb-4 relative inline-block">
               FYP Registration
-              <span className="block h-1 bg-green-500 mt-2 w-24 animate-[growLine_1s_ease-in-out_forwards] rounded-full"></span>
+              <span className="block h-1 bg-green-500 mt-2 w-[300px] animate-[growLine_1s_ease-in-out_forwards] rounded-full"></span>
             </h2>
 
             <p className="text-gray-200 mt-3 text-lg leading-relaxed max-w-3xl">
@@ -176,8 +181,8 @@ export default function FypHomePage() {
 
             {/* Registration Rules */}
             <div className="mt-10 backdrop-blur-md bg-white/10 p-6 rounded-2xl border border-white/20 shadow-lg">
-              <h3 className="text-2xl font-semibold text-green-400 flex items-center gap-2 mb-4">
-                <i className="fa-solid fa-scroll text-green-400 text-xl"></i>
+              <h3 className="text-2xl font-semibold  flex items-center gap-2 mb-4">
+                <i className="fa-solid fa-scroll text-white text-xl"></i>
                 Important Guidelines for Project Selection:
               </h3>
 
@@ -228,10 +233,10 @@ export default function FypHomePage() {
         >
           {/* 🔹 Header */}
           <div className="max-w-6xl mx-auto text-center mb-14">
-            <h2 className="text-4xl font-extrabold text-green-700 dark:text-green-400 mb-3">
+            <h2 className="text-4xl font-extrabold   dark:text-white mb-3">
               Position Holders in Computer Science (FYP II)
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-gray-600 text-left dark:text-gray-300 max-w-3xl mx-auto">
               Celebrating the remarkable achievements of our talented students
               whose Final Year Projects demonstrate innovation, skill, and
               dedication.
@@ -251,7 +256,7 @@ export default function FypHomePage() {
                 <div className="absolute top-0 right-0 bg-yellow-400 text-white px-4 py-1 rounded-bl-xl font-bold">
                   1st Position
                 </div>
-                <h3 className="text-xl font-bold text-green-700 mb-2">
+                <h3 className="text-xl font-bold dark:text-white mb-2">
                   Verti Nutrient System
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
@@ -276,7 +281,7 @@ export default function FypHomePage() {
                 <div className="absolute top-0 right-0 bg-gray-400 text-white px-4 py-1 rounded-bl-xl font-bold">
                   2nd Position
                 </div>
-                <h3 className="text-xl font-bold text-green-700 mb-2">
+                <h3 className="text-xl font-bold dark:text-white mb-2">
                   Multi-Tenant Hyper Market Dispatching System
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
@@ -301,7 +306,7 @@ export default function FypHomePage() {
                 <div className="absolute top-0 right-0 bg-amber-700 text-white px-4 py-1 rounded-bl-xl font-bold">
                   3rd Position
                 </div>
-                <h3 className="text-xl font-bold text-green-700 mb-2">
+                <h3 className="text-xl font-bold dark:text-white mb-2">
                   Deal Hunter
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
@@ -317,8 +322,8 @@ export default function FypHomePage() {
 
           {/* 🔹 Divider for SE Section */}
           <div className="mt-20 text-center">
-            <h2 className="text-3xl font-bold text-green-700 dark:text-green-400 inline-block border-b-4 border-green-500 pb-1">
-              🧠 Position Holders in Software Engineering (FYP II)
+            <h2 className="text-3xl font-bold  dark:text-white inline-block border-b-4  pb-1">
+              Position Holders in Software Engineering (FYP II)
             </h2>
           </div>
 
@@ -335,7 +340,7 @@ export default function FypHomePage() {
                 <div className="absolute top-0 right-0 bg-yellow-400 text-white px-4 py-1 rounded-bl-xl font-bold">
                   1st Position
                 </div>
-                <h3 className="text-xl font-bold text-green-700 mb-2">
+                <h3 className="text-xl font-bold dark:text-white mb-2">
                   AI-Powered Chatbot for Academic Support
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
@@ -360,7 +365,7 @@ export default function FypHomePage() {
                 <div className="absolute top-0 right-0 bg-gray-400 text-white px-4 py-1 rounded-bl-xl font-bold">
                   2nd Position
                 </div>
-                <h3 className="text-xl font-bold text-green-700 mb-2">
+                <h3 className="text-xl font-bold dark:text-white mb-2">
                   Blockchain-Based Attendance Management
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">
@@ -385,7 +390,7 @@ export default function FypHomePage() {
                 <div className="absolute top-0 right-0 bg-amber-700 text-white px-4 py-1 rounded-bl-xl font-bold">
                   3rd Position
                 </div>
-                <h3 className="text-xl font-bold text-green-700 mb-2">
+                <h3 className="text-xl font-bold dark:text-whitemb-2">
                   Smart Campus Automation System
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-3">

@@ -7,6 +7,7 @@ import {
   Book,
 } from "lucide-react";
 
+// ================= SUPER ADMIN LINKS =================
 export const superAdminLinks = [
   {
     path: "/dashboard",
@@ -21,7 +22,7 @@ export const superAdminLinks = [
   {
     path: "/cordinator/student",
     label: "Students List",
-    icon: <FileText size={18} />,
+    icon: <Users size={18} />,
   },
   {
     path: "/announcement",
@@ -45,30 +46,36 @@ export const superAdminLinks = [
   },
 ];
 
+// ================= STUDENT LINKS =================
 export const studentLinks = [
-  { path: "/student/dashboard", label: "Dashboard", icon: <Home size={18} /> },
+  {
+    path: "/student/dashboard",
+    label: "Dashboard",
+    icon: <Home size={18} />,
+  },
   {
     path: "/student/assignments",
     label: "Assignments",
-    icon: <Users size={18} />,
+    icon: <FileText size={18} />,
   },
   {
     path: "/student/supervisor",
     label: "Supervisor",
-    icon: <Book size={18} />,
+    icon: <Users size={18} />,
   },
   {
     path: "/student/my_group",
     label: "Groupmates",
-    icon: <Book size={18} />,
+    icon: <Users size={18} />,
   },
   {
     path: "/student/results",
     label: "Results",
-    icon: <Book size={18} />,
+    icon: <ClipboardCheck size={18} />,
   },
 ];
 
+// ================= SUPERVISOR LINKS =================
 export const Supervisor = [
   {
     path: "/supervisor/dashboard",
@@ -78,25 +85,26 @@ export const Supervisor = [
   {
     path: "/supervisor/assignments",
     label: "Proposal Requests",
-    icon: <Users size={18} />,
+    icon: <FileText size={18} />,
   },
   {
     path: "/supervisor/Propsal",
-    label: "Proposal Review pannel",
-    icon: <FileText size={18} />,
+    label: "Proposal Review Panel",
+    icon: <ClipboardCheck size={18} />,
   },
-
-  { path: "/supervisor/groups", label: "Groups", icon: <FileText size={18} /> },
+  {
+    path: "/supervisor/groups",
+    label: "Groups",
+    icon: <Users size={18} />,
+  },
   {
     path: "/supervisor/evaluator-result",
     label: "Evaluator Results",
-    icon: <FileText size={18} />,
+    icon: <ClipboardCheck size={18} />,
   },
-
   {
     path: "/supervisor/add-annnoucements",
-    label: "Annoucements",
-    icon: <FileText size={18} />,
+    label: "Announcements",
+    icon: <Megaphone size={18} />,
   },
-  ,
 ];

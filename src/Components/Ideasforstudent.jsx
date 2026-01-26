@@ -119,7 +119,7 @@ const FypIdeas = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-green-50 to-white dark:from-gray-900 dark:to-gray-800 py-20 px-6">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold dark:text-white mb-4">
             Potential Sources for FYP Topics
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-lg mb-10">
@@ -136,7 +136,7 @@ const FypIdeas = () => {
               key={i}
               className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6 transition-transform transform hover:-translate-y-2 hover:shadow-2xl"
             >
-              <h2 className="text-xl font-bold text-green-700 mb-2">
+              <h2 className="text-xl font-bold dark:text-white mb-2">
                 {topic.category}
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
@@ -149,7 +149,7 @@ const FypIdeas = () => {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-600 dark:text-green-400 hover:text-yellow-400 transition-colors underline"
+                      className="text-primary dark:text-primary hover:text-green-400 transition-colors underline"
                     >
                       {link.name}
                     </a>

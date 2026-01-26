@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import img from "/assets/arid.png";
 
 export default function Sidebar({ links = [] }) {
@@ -9,34 +8,29 @@ export default function Sidebar({ links = [] }) {
 
   return (
     <>
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:flex fixed top-0 left-0 h-screen w-64 bg-green-800 text-white shadow-lg flex-col border-r border-green-700">
+      {/* ================= Desktop Sidebar ================= */}
+      <aside className="hidden md:flex fixed top-0 left-0 h-screen w-64 bg-[#0f5d3b] text-white shadow-lg flex-col">
         {/* Logo Section */}
-        <div className="flex flex-col items-center py-6 border-b border-green-700">
-          <Link to="/">
-            <img
-              src={img}
-              alt="University Logo"
-              className="h-20 w-20 rounded-lg bg-white p-2 shadow-md"
-            />
-          </Link>
-          <h1 className="mt-2 text-xl font-semibold text-white text-center">
-            PMAS AAUR
-          </h1>
+        <div className="px-6 py-6">
+          <h1 className="text-2xl font-bold">Fyp Managment System</h1>
+          <p className="text-sm text-gray-200 mt-1">ARID University</p>
         </div>
 
+        <hr className="border-green-700 mx-6" />
+
         {/* Nav Items */}
-        <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+        <nav className="flex-1 pl-5 py-6 space-y-2 overflow-y-auto">
           {links.length > 0 ? (
             links.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
+                  `flex items-center gap-3 px-4 py-3 rounded-l-full font-medium transition-all duration-300
+                  ${
                     isActive
-                      ? "bg-green-600 text-white shadow-md"
-                      : "hover:bg-green-700 hover:text-white"
+                      ? "bg-white text-[#0f5d3b] shadow-md"
+                      : "text-white hover:bg-green-700/60"
                   }`
                 }
               >
@@ -48,10 +42,15 @@ export default function Sidebar({ links = [] }) {
             <p className="text-gray-300 text-sm px-4">No Links Available</p>
           )}
         </nav>
+
+        {/* Footer */}
+        <div className="text-center text-xs text-gray-300 py-4">
+          © 2026 ARID University
+        </div>
       </aside>
 
-      {/* Mobile Navbar with Dropdown */}
-      <div className="md:hidden fixed top-0 left-0 w-full bg-green-800 text-white shadow-md z-50 border-b border-green-700">
+      {/* ================= Mobile Navbar ================= */}
+      <div className="md:hidden fixed top-0 left-0 w-full bg-[#0f5d3b] text-white shadow-md z-50">
         <div className="flex items-center justify-between px-4 py-3">
           {/* Logo */}
           <div className="flex items-center gap-2">
@@ -60,7 +59,10 @@ export default function Sidebar({ links = [] }) {
               alt="University Logo"
               className="h-10 w-10 rounded-lg bg-white p-1 shadow-sm"
             />
-            <span className="text-white font-semibold text-lg">PMAS AAUR</span>
+            <div>
+              <h1 className="font-semibold text-lg">OBE-RMS</h1>
+              <p className="text-xs text-gray-200">ARID University</p>
+            </div>
           </div>
 
           {/* Menu Toggle */}
@@ -72,9 +74,9 @@ export default function Sidebar({ links = [] }) {
           </button>
         </div>
 
-        {/* Dropdown Menu */}
+        {/* Dropdown Menu (SAME UI AS DESKTOP) */}
         {open && (
-          <nav className="flex flex-col px-4 py-2 space-y-2 bg-green-700 border-t border-green-600">
+          <nav className="flex flex-col px-4 py-4 space-y-2 bg-[#0f5d3b] border-t border-green-700">
             {links.length > 0 ? (
               links.map((link) => (
                 <NavLink
@@ -82,10 +84,11 @@ export default function Sidebar({ links = [] }) {
                   to={link.path}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `flex items-center gap-3 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                    `flex items-center gap-3 px-4 py-3 rounded-full font-medium transition-all duration-300
+                    ${
                       isActive
-                        ? "bg-green-600 text-white shadow"
-                        : "hover:bg-green-600 hover:text-white"
+                        ? "bg-white text-[#0f5d3b] shadow-md"
+                        : "text-white hover:bg-green-700/60"
                     }`
                   }
                 >

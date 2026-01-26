@@ -10,58 +10,152 @@ export default function StudentSupervisors() {
   const supervisors = [
     {
       id: 1,
-      image:
-        "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg",
-      name: "Dr. Ahsan Arshad",
-      expertise: "Artificial Intelligence, Machine Learning",
+      image: "https://www.uaar.edu.pk/media/profile/yasir-151122-1.jpeg",
+      name: "Dr. Yaser Hafeez",
+      expertise: "Situational Method Engineering & Agile Practices",
       description:
-        "Expert in AI/ML with 12+ years of research and supervision.",
+        "Professor / Director at UIIT, expert in Agile Practices and Configurable Systems.",
       totalSlots: 6,
-      pendingSlots: 2,
+      pendingSlots: 5,
+      id_card_no: "21-ARID-1234",
     },
     {
       id: 2,
-      image:
-        "https://images.pexels.com/photos/1181424/pexels-photo-1181424.jpeg",
-      name: "Dr. Sarah Khan",
-      expertise: "Software Engineering, Cloud Computing",
+      image: "https://www.uaar.edu.pk/media/profile/usman-270422.jpeg",
+      name: "Mr. Muhammad Usman Javed",
+      expertise: "Human Resource & Organizational Psychology",
       description:
-        "Specializes in large-scale system architecture and cloud platforms.",
-      totalSlots: 6,
-      pendingSlots: 4,
-    },
-    {
-      id: 3,
-      image:
-        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
-      name: "Dr. Hamid Raza",
-      expertise: "Blockchain, Cybersecurity",
-      description:
-        "Working on secure distributed systems with blockchain applications.",
-      totalSlots: 6,
-      pendingSlots: 1,
-    },
-    {
-      id: 4,
-      image:
-        "https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg",
-      name: "Dr. Nadia Yousaf",
-      expertise: "Data Science, Big Data Analytics",
-      description:
-        "Focuses on large data-driven solutions and predictive modeling.",
+        "Assistant Registrar focusing on Human Resources and Organizational Behaviors.",
       totalSlots: 6,
       pendingSlots: 3,
     },
     {
-      id: 5,
-      image:
-        "https://images.pexels.com/photos/532220/pexels-photo-532220.jpeg",
-      name: "Dr. Imran Shah",
-      expertise: "Computer Vision, Graphics",
+      id: 3,
+      image: "https://www.uaar.edu.pk/media/profile/saif-26-07-19.jpg",
+      name: "Dr. Saif Ur Rehman",
+      expertise: "Artificial Intelligence & Machine Learning",
       description:
-        "Expert in image processing, OpenGL, and computer graphics.",
+        "Assistant Professor with research interests in AI, ML, Data Mining and Social Network Analysis.",
       totalSlots: 6,
       pendingSlots: 5,
+    },
+    {
+      id: 4,
+      image: "https://www.uaar.edu.pk/media/profile/rubina-300922.JPG",
+      name: "Dr. Rubina Ghazal",
+      expertise: "Cyber Security & Distributed Computing",
+      description:
+        "Assistant Professor working on Role Based Access Control and Cyber Security.",
+      totalSlots: 6,
+      pendingSlots: 4,
+    },
+    {
+      id: 5,
+      image: "https://www.uaar.edu.pk/media/profile/X1z4AkT.jpg",
+      name: "Dr. Saqib Majeed",
+      expertise: "Semantics Programming & Data Structures",
+      description:
+        "Assistant Professor focusing on Semantics & Data Structures.",
+      totalSlots: 6,
+      pendingSlots: 3,
+    },
+    {
+      id: 6,
+      image: "https://www.uaar.edu.pk/media/profile/MuhammadAqib-29-11-19.jpg",
+      name: "Dr. Muhammad Aqib",
+      expertise: "Deep Learning & Big Data",
+      description:
+        "Assistant Professor specializing in Deep Learning, Big Data and GPU Computing.",
+      totalSlots: 6,
+      pendingSlots: 4,
+    },
+    {
+      id: 7,
+      image: "https://www.uaar.edu.pk/media/profile/kashif-uiit.png",
+      name: "Dr. Kashif Sattar",
+      expertise: "Networks & IoT",
+      description:
+        "Assistant Professor with expertise in Wireless Networks and IoT.",
+      totalSlots: 6,
+      pendingSlots: 3,
+    },
+    {
+      id: 8,
+      image: "https://www.uaar.edu.pk/media/profile/tariq-10072020.jpg",
+      name: "Dr. Tariq Ali",
+      expertise: "Machine Learning & Databases",
+      description: "Assistant Professor in Machine Learning & Databases.",
+      totalSlots: 6,
+      pendingSlots: 3,
+    },
+    {
+      id: 9,
+      image: "https://www.uaar.edu.pk/media/profile/asifuiit.jpg",
+      name: "Dr. Asif Nawaz",
+      expertise: "NLP & Social Media Analysis",
+      description: "Assistant Professor specializing in NLP and Text Mining.",
+      totalSlots: 6,
+      pendingSlots: 3,
+    },
+    {
+      id: 10,
+      image: "https://www.uaar.edu.pk/media/profile/sadia-201222.jpg",
+      name: "Dr. Sadia Ali",
+      expertise: "Software Engineering & Machine Learning",
+      description:
+        "Assistant Professor with research in Software Engineering and Machine Learning.",
+      totalSlots: 6,
+      pendingSlots: 4,
+    },
+    {
+      id: 11,
+      image: "https://www.uaar.edu.pk/media/profile/habib-070922.jpg",
+      name: "Dr. Muhammad Habib",
+      expertise: "Computer Vision & Deep Learning",
+      description:
+        "Assistant Professor working on Computer Vision and Deep Learning.",
+      totalSlots: 6,
+      pendingSlots: 3,
+    },
+    {
+      id: 12,
+      image: "https://www.uaar.edu.pk/media/profile/ruqia-070922.jpg",
+      name: "Dr. Ruqia Bibi",
+      expertise: "Machine Learning & Image Processing",
+      description:
+        "Assistant Professor specializing in Machine Learning & Image Processing.",
+      totalSlots: 6,
+      pendingSlots: 3,
+    },
+    {
+      id: 14,
+      image: "https://www.uaar.edu.pk/media/profile/noreen-19625.jpg",
+      name: "Dr. Noureen Zafar",
+      expertise: "Smart Transportation & Digital Agriculture",
+      description:
+        "Lecturer with focus on Smart Transport and Image Processing.",
+      totalSlots: 6,
+      pendingSlots: 2,
+    },
+    {
+      id: 15,
+      image: "https://www.uaar.edu.pk/media/profile/Dmx7dLB.jpg",
+      name: "Ms. Bushra Hamid",
+      expertise: "Software Requirement & Quality Engineering",
+      description:
+        "Lecturer specializing in Software Quality and Requirements.",
+      totalSlots: 6,
+      pendingSlots: 2,
+    },
+    {
+      id: 16,
+      image: "https://www.uaar.edu.pk/media/profile/sarfraz-14623.jpg",
+      name: "Dr. Sarfaraz Bibi",
+      expertise: "Software Quality & NLP",
+      description:
+        "Lecturer with research in Software Quality Engineering and NLP.",
+      totalSlots: 6,
+      pendingSlots: 2,
     },
   ];
 
@@ -69,11 +163,11 @@ export default function StudentSupervisors() {
   const filtered = supervisors.filter(
     (sup) =>
       sup.name.toLowerCase().includes(search.toLowerCase()) ||
-      sup.expertise.toLowerCase().includes(search.toLowerCase())
+      sup.expertise.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
-    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-green-50">
+    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-[#f4f7f5]">
       <h1 className="text-3xl font-bold text-green-800 mb-6 text-center">
         Available Supervisors
       </h1>

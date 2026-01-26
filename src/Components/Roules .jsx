@@ -4,10 +4,10 @@ import Navbar from "./Navbar2";
 
 const RulesAndSOP = () => {
   return (
-    <div className="bg-gray-50 h-screen  text-gray-800">
+    <div className="dark:bg-gray-800   text-gray-800">
       <Navbar />
-      <header className="bg-green-700 text-white mt-10 py-8 text-center">
-        <h1 className="text-3xl font-bold uppercase">
+      <header className=" text-white bg-primary mt-10 py-8 text-center">
+        <h1 className="text-3xl  font-bold uppercase">
           PMAS Arid Agriculture University
         </h1>
         <p className="text-lg mt-2">Department of Computer Science</p>
@@ -19,10 +19,10 @@ const RulesAndSOP = () => {
       <main className="max-w-5xl mx-auto px-6 py-10 space-y-12">
         {/* Section 1 */}
         <section>
-          <h2 className="text-2xl font-semibold text-green-800 mb-4">
+          <h2 className="text-2xl dark:text-white font-semibold dark:text-white mb-4">
             Supervision
           </h2>
-          <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
+          <ul className="list-disc list-inside space-y-2 text-gray-700  leading-relaxed dark:text-gray-300">
             <li>
               A faculty member with the designation of Lecturer or above is
               eligible for supervision.
@@ -37,10 +37,10 @@ const RulesAndSOP = () => {
 
         {/* Section 2 */}
         <section>
-          <h2 className="text-2xl font-semibold text-green-800 mb-4">
+          <h2 className="text-2xl font-semibold dark:text-white mb-4">
             Students
           </h2>
-          <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
+          <ul className="list-disc list-inside dark:text-gray-300 space-y-2 text-gray-700 leading-relaxed">
             <li>
               Students are eligible for FYP-I registration after completing six
               semesters and all prerequisites.
@@ -59,11 +59,13 @@ const RulesAndSOP = () => {
 
         {/* Section 3 */}
         <section>
-          <h2 className="text-2xl font-semibold text-green-800 mb-4">
+          <h2 className="text-2xl font-semibold dark:text-white  mb-4">
             Evaluation
           </h2>
-          <p className="text-gray-700 mb-3 font-medium">FYP-I (2 Credits)</p>
-          <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
+          <p className="text-gray-700 mb-3 dark:text-gray-300 font-medium">
+            FYP-I (2 Credits)
+          </p>
+          <ul className="list-disc list-inside dark:text-gray-300 space-y-2 text-gray-700 leading-relaxed">
             <li>
               Proposal evaluation will be through a double-blind review process
               until approval.
@@ -75,10 +77,10 @@ const RulesAndSOP = () => {
             <li>Evaluation includes presentation, viva, and report.</li>
           </ul>
 
-          <p className="text-gray-700 mt-6 mb-3 font-medium">
+          <p className="text-gray-700 mt-6 dark:text-gray-300 mb-3 font-medium">
             FYP-II (4 Credits)
           </p>
-          <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
+          <ul className="list-disc dark:text-gray-300 list-inside space-y-2 text-gray-700 leading-relaxed">
             <li>
               Pre-evaluation after midterm by Supervisor & Internal Evaluator to
               assess 70–80% completion.
@@ -100,26 +102,24 @@ const RulesAndSOP = () => {
 
         {/* Section 4 */}
         <section>
-          <h2 className="text-2xl font-semibold text-green-800 mb-4">
+          <h2 className="text-2xl font-semibold dark:text-white  mb-4">
             Categories of FYP
           </h2>
 
           <div className="space-y-8">
             <div>
-              <h3 className="text-xl font-semibold text-green-700 mb-2">
-                1. General FYP
-              </h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <h3 className="text-xl  font-semibold  mb-2">1. General FYP</h3>
+              <ul className="list-disc dark:text-gray-300  list-inside space-y-2 text-gray-700">
                 <li>Traditional model already in progress.</li>
                 <li>Evaluation: Supervisor 30%, Internal 30%, External 40%.</li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-green-700 mb-2">
+              <h3 className="text-xl dark:text-white font-semibold  mb-2">
                 2. Continuing FYP
               </h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <ul className="list-disc dark:text-gray-300 list-inside space-y-2 text-gray-700">
                 <li>
                   Supervisor can divide project into modules; each module can
                   count as a separate FYP.
@@ -133,10 +133,10 @@ const RulesAndSOP = () => {
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-green-700 mb-2">
+              <h3 className="text-xl dark:text-white font-semibold  mb-2">
                 3. Industrial FYP
               </h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <ul className="list-disc dark:text-gray-300 list-inside space-y-2 text-gray-700">
                 <li>
                   Students can select industry-based projects with proper MOU
                   approval.

@@ -21,7 +21,7 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement
+  LineElement,
 );
 
 export default function StudentDashboard() {
@@ -89,7 +89,7 @@ export default function StudentDashboard() {
   };
 
   return (
-    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-green-50">
+    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-[#f4f7f5]">
       {/* Header */}
       <h1 className="text-3xl font-bold text-green-800 mb-6">
         Student Dashboard
@@ -97,7 +97,7 @@ export default function StudentDashboard() {
 
       {/* Announcements Section */}
       <div className="bg-white p-6 rounded-2xl shadow mb-6">
-        <h2 className="text-lg font-semibold flex items-center gap-2 text-green-700 mb-4">
+        <h2 className="text-lg font-semibold flex items-center gap-2 text-primary mb-4">
           <Bell size={18} /> Announcements
         </h2>
         <ul className="space-y-3 text-sm text-gray-700">
@@ -125,7 +125,7 @@ export default function StudentDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Assignments */}
         <div className="bg-white p-6 rounded-2xl shadow lg:col-span-2">
-          <h2 className="text-lg font-semibold flex items-center gap-2 text-green-700 mb-4">
+          <h2 className="text-lg font-semibold flex items-center gap-2 text-primary mb-4">
             <ClipboardList size={18} /> Assignments
           </h2>
           <ul className="space-y-3 text-sm">
@@ -138,10 +138,10 @@ export default function StudentDashboard() {
                 <span
                   className={`px-3 py-1 rounded-full text-xs font-semibold ${
                     a.status === "Submitted"
-                      ? "bg-green-100 text-green-700"
+                      ? "bg-green-100 text-primary"
                       : a.status === "Pending"
-                      ? "bg-red-100 text-red-700"
-                      : "bg-yellow-100 text-yellow-700"
+                        ? "bg-red-100 text-red-700"
+                        : "bg-yellow-100 text-yellow-700"
                   }`}
                 >
                   {a.status}
@@ -153,7 +153,7 @@ export default function StudentDashboard() {
 
         {/* Supervisor & Project Info */}
         <div className="bg-white p-6 rounded-2xl shadow">
-          <h2 className="text-lg font-semibold flex items-center gap-2 text-green-700 mb-4">
+          <h2 className="text-lg font-semibold flex items-center gap-2 text-primary mb-4">
             <User size={18} /> Supervisor Info
           </h2>
           <div className="p-4 bg-green-50 rounded-lg shadow-sm mb-4">
@@ -163,7 +163,7 @@ export default function StudentDashboard() {
               <strong>Research:</strong> Agile, Blockchain, SRE <br />
             </p>
           </div>
-          <h2 className="text-lg font-semibold flex items-center gap-2 text-green-700 mb-2">
+          <h2 className="text-lg font-semibold flex items-center gap-2 text-primary mb-2">
             <FileText size={18} /> Project
           </h2>
           <div className="p-4 bg-green-50 rounded-lg shadow-sm">
@@ -178,7 +178,7 @@ export default function StudentDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Marks Bar Chart */}
         <div className="bg-white p-6 rounded-2xl shadow">
-          <h2 className="text-lg font-semibold mb-4 text-green-700">
+          <h2 className="text-lg font-semibold mb-4 text-primary">
             Performance (Marks)
           </h2>
           <Bar data={marksData} />
@@ -186,7 +186,7 @@ export default function StudentDashboard() {
 
         {/* Progress Line Chart */}
         <div className="bg-white p-6 rounded-2xl shadow">
-          <h2 className="text-lg font-semibold mb-4 text-green-700">
+          <h2 className="text-lg font-semibold mb-4 text-primary">
             Project Progress
           </h2>
           <Line data={progressData} />
@@ -203,7 +203,7 @@ export default function StudentDashboard() {
             >
               <X size={20} />
             </button>
-            <h3 className="text-lg font-semibold text-green-700 mb-2">
+            <h3 className="text-lg font-semibold text-primary mb-2">
               {selectedAnnouncement.msg}
             </h3>
             <p className="text-sm text-gray-600 mb-2">

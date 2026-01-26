@@ -22,7 +22,7 @@ const Navbar = () => {
               className="h-14 w-14 object-contain"
             />
             <div>
-              <h1 className="text-lg font-bold text-green-700">
+              <h1 className="text-lg font-bold text-primary">
                 University and Institute of Information Technology
               </h1>
               <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -34,7 +34,7 @@ const Navbar = () => {
           {/* Login Button (sirf redirect karega) */}
           <button
             onClick={() => navigate("/login")}
-            className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors"
+            className="px-6 py-2 bg-primary hover:bg-primary text-white rounded-lg font-medium transition-colors"
           >
             Login
           </button>
@@ -45,9 +45,9 @@ const Navbar = () => {
       <div className="h-20"></div>
 
       {/* 🔹 Navigation Bar */}
-      <header className="bg-green-700 text-white py-3 shadow-md">
+      <header className="bg-primary text-white py-3 shadow-md">
         <div className="max-w-6xl mx-auto px-4">
-          <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
+          <nav className="flex flex-wrap font-titillium font-bold justify-center gap-4 md:gap-6 text-sm">
             <Link to="/distinguished-fyp" className="hover:text-yellow-300">
               Distinguished FYP
             </Link>

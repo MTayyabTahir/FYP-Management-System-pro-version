@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { FileText, CheckCircle, XCircle, Download } from "lucide-react";
+import {
+  FileText,
+  CheckCircle,
+  XCircle,
+  Download,
+  MoreVertical,
+} from "lucide-react";
 
 export default function SupervisorAssignments() {
   const [assignments, setAssignments] = useState([
@@ -32,10 +38,13 @@ export default function SupervisorAssignments() {
     },
   ]);
 
+  const [openMenu, setOpenMenu] = useState(null);
+
   const handleAction = (id, action) => {
     setAssignments((prev) =>
-      prev.map((a) => (a.id === id ? { ...a, status: action } : a))
+      prev.map((a) => (a.id === id ? { ...a, status: action } : a)),
     );
+    setOpenMenu(null);
   };
 
   return (
@@ -57,6 +66,7 @@ export default function SupervisorAssignments() {
               <th className="px-4 py-3 text-center">Action</th>
             </tr>
           </thead>
+
           <tbody>
             {assignments.map((a) => (
               <tr key={a.id} className="border-b hover:bg-gray-50 transition">
@@ -75,32 +85,48 @@ export default function SupervisorAssignments() {
                     <Download size={16} /> {a.file}
                   </a>
                 </td>
+
+                {/* Status */}
                 <td className="px-4 py-3 text-center">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-semibold ${
                       a.status === "Pending"
                         ? "bg-yellow-100 text-yellow-700"
                         : a.status === "Accepted"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
                     }`}
                   >
                     {a.status}
                   </span>
                 </td>
-                <td className="px-4 py-3 flex justify-center gap-2">
+
+                {/* Action (3 dots menu) */}
+                <td className="px-4 py-3 text-center relative">
                   <button
-                    onClick={() => handleAction(a.id, "Accepted")}
-                    className="px-3 py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 flex items-center gap-1"
+                    onClick={() => setOpenMenu(openMenu === a.id ? null : a.id)}
+                    className="p-2 rounded-full hover:bg-gray-200 transition"
                   >
-                    <CheckCircle size={16} /> Accept
+                    <MoreVertical size={18} />
                   </button>
-                  <button
-                    onClick={() => handleAction(a.id, "Rejected")}
-                    className="px-3 py-1 bg-red-600 text-white rounded-lg text-sm hover:bg-red-700 flex items-center gap-1"
-                  >
-                    <XCircle size={16} /> Reject
-                  </button>
+
+                  {openMenu === a.id && (
+                    <div className="absolute right-6 mt-2 w-36 bg-white border rounded-lg shadow-lg z-10">
+                      <button
+                        onClick={() => handleAction(a.id, "Accepted")}
+                        className="w-full px-4 py-2 text-sm flex items-center gap-2 hover:bg-green-50 text-green-700"
+                      >
+                        <CheckCircle size={16} /> Approve
+                      </button>
+
+                      <button
+                        onClick={() => handleAction(a.id, "Rejected")}
+                        className="w-full px-4 py-2 text-sm flex items-center gap-2 hover:bg-red-50 text-red-700"
+                      >
+                        <XCircle size={16} /> Reject
+                      </button>
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}

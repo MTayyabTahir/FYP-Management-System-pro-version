@@ -15,7 +15,7 @@ import {
   Supervisor,
 } from "./Pages/Sidebarlinks";
 
-// Coordinator Pages
+// ================= COORDINATOR =================
 import Dashboard from "./Pages/Codinator/Dahboard";
 import SupervisorList from "./Pages/Codinator/Supervisorlist";
 import StudentList from "./Pages/Codinator/Studentdata";
@@ -24,8 +24,9 @@ import EvaluatorAssignment from "./Pages/Codinator/Evaluator";
 import SupervisorProfile from "./Pages/Codinator/Supervisor-profile";
 import CoordinatorProfile from "./Pages/Codinator/Cordinator-profile";
 import FypMarksTable from "./Pages/Codinator/Result";
+import Proposalevelauator from "./Pages/Codinator/Proposalevealuator";
 
-// Student Pages
+// ================= STUDENT =================
 import StudentDashboard from "./Pages/Student/Student-dashboard";
 import AssignmentsPage from "./Pages/Student/Assignments_submit";
 import StudentSupervisors from "./Pages/Student/Student_supervisor";
@@ -33,42 +34,45 @@ import SupervisorProfileWithPlagiarism from "./Pages/Student/Supervisor_profile"
 import StudentResult from "./Pages/Student/Student-result";
 import StudentGroupmates from "./Pages/Student/Student-group";
 
-// Supervisor Pages
+// ================= SUPERVISOR =================
 import SupervisorDashboard from "./Pages/Supervisors/Dashboard";
 import SupervisorAssignments from "./Pages/Supervisors/Assignmensts";
 import StudentGroups from "./Pages/Supervisors/Groups";
 import SupervisorAnnouncements from "./Pages/Supervisors/Addannoucements";
 import SupervisorEvaluator from "./Pages/Supervisors/Evealuator-results";
+import Projectpannel from "./Pages/Supervisors/Proposalpannel";
 
-// Public Pages
+// ================= PUBLIC =================
 import DistinguishedFYPs from "./Components/Distingfyp";
 import FypIdeas from "./Components/Ideasforstudent";
 import ImportantDates from "./Components/Dates";
 import RulesAndSOP from "./Components/Roules ";
 import DownloadsPage from "./Components/Downloads";
 
-// Login
-import LoginPage from "./Components/Login";
+// ================= LOGIN =================
+import LoginPage from "./Components/Home";
 import LoginPage2 from "./Components/Login2";
-import Projectpannel from "./Pages/Supervisors/Proposalpannel";
-import Proposalevelauator from "./Pages/Codinator/Proposalevealuator";
+
+// =================================================
 
 function Layout() {
   const location = useLocation();
   const role = localStorage.getItem("role");
 
-  // ✅ SIMPLE CHECK
+  const publicRoutes = [
+    "/",
+    "/distinguished-fyp",
+    "/fyp-ideas",
+    "/key-dates",
+    "/rules-and-sops",
+    "/downloads",
+  ];
+
+  const isPublicPage = publicRoutes.includes(location.pathname);
   const isLoginPage = location.pathname === "/login";
 
-  // ✅ Public pages (NO sidebar, NO navbar)
-  if (
-    location.pathname === "/" ||
-    location.pathname === "/distinguished-fyp" ||
-    location.pathname === "/fyp-ideas" ||
-    location.pathname === "/key-dates" ||
-    location.pathname === "/rules-and-sops" ||
-    location.pathname === "/downloads"
-  ) {
+  // ================= PUBLIC PAGES (FULL SCREEN) =================
+  if (isPublicPage) {
     return (
       <Routes>
         <Route path="/" element={<LoginPage />} />
@@ -81,61 +85,71 @@ function Layout() {
     );
   }
 
-  // 🔐 Protected pages (except /login)
-  if (!role && !isLoginPage) {
+  // ================= LOGIN =================
+  if (isLoginPage) {
+    return (
+      <Routes>
+        <Route path="/login" element={<LoginPage2 />} />
+      </Routes>
+    );
+  }
+
+  // ================= AUTH GUARD =================
+  if (!role) {
     return <Navigate to="/" replace />;
   }
 
   let links = [];
-  if (role === "super-admins") links = superAdminLinks;
+  if (role === "coordinator") links = superAdminLinks;
   else if (role === "student") links = studentLinks;
   else if (role === "supervisor") links = Supervisor;
 
+  // ================= DASHBOARD LAYOUT =================
   return (
-    <div className="flex min-h-screen">
-      {/* ❌ Sidebar hide on /login */}
-      {!isLoginPage && <Sidebar links={links} />}
+    <div className="flex min-h-screen bg-gray-100">
+      <Sidebar links={links} />
 
       <div className="flex-1 flex flex-col">
-        {/* ❌ Navbar hide on /login */}
-        {!isLoginPage && <Navbar />}
+        <Navbar />
 
-        <main className="p-6 bg-gray-100 flex-1 overflow-y-auto">
+        {/* ❗ NO padding / NO bg here */}
+        <main className="flex-1 overflow-y-auto">
           <Routes>
-            {/* LOGIN */}
-            <Route path="/login" element={<LoginPage2 />} />
+            {/* ===== COORDINATOR ===== */}
+            {role === "super-admins" ||
+              ("coordinator" && (
+                <>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route
+                    path="/cordinator/supervisor-list"
+                    element={<SupervisorList />}
+                  />
+                  <Route path="/cordinator/student" element={<StudentList />} />
+                  <Route path="/announcement" element={<Announcements />} />
+                  <Route
+                    path="/cordinator/evaluator"
+                    element={<EvaluatorAssignment />}
+                  />
+                  <Route
+                    path="/cordinator/proposalevaluator"
+                    element={<Proposalevelauator />}
+                  />
+                  <Route
+                    path="/coordinator/supervisor-profile"
+                    element={<SupervisorProfile />}
+                  />
+                  <Route
+                    path="/coordinator/profile"
+                    element={<CoordinatorProfile />}
+                  />
+                  <Route
+                    path="/cordinator/result"
+                    element={<FypMarksTable />}
+                  />
+                </>
+              ))}
 
-            {/* COORDINATOR */}
-            {role === "super-admins" && (
-              <>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route
-                  path="/cordinator/supervisor-list"
-                  element={<SupervisorList />}
-                />
-                <Route path="/cordinator/student" element={<StudentList />} />
-                <Route path="/announcement" element={<Announcements />} />
-                <Route
-                  path="/cordinator/evaluator"
-                  element={<EvaluatorAssignment />}
-                />
-                <Route
-                  path="/cordinator/proposalevaluator"
-                  element={<Proposalevelauator />}
-                />
-                <Route
-                  path="/coordinator/supervisor-profile"
-                  element={<SupervisorProfile />}
-                />
-                <Route
-                  path="/coordinator/profile"
-                  element={<CoordinatorProfile />}
-                />
-                <Route path="/cordinator/result" element={<FypMarksTable />} />
-              </>
-            )}
-
-            {/* STUDENT */}
+            {/* ===== STUDENT ===== */}
             {role === "student" && (
               <>
                 <Route
@@ -162,7 +176,7 @@ function Layout() {
               </>
             )}
 
-            {/* SUPERVISOR */}
+            {/* ===== SUPERVISOR ===== */}
             {role === "supervisor" && (
               <>
                 <Route
@@ -192,6 +206,7 @@ function Layout() {
   );
 }
 
+// ================= ROOT =================
 export default function App() {
   return (
     <Router>

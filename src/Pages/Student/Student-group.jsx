@@ -44,7 +44,7 @@ export default function StudentGroupmates() {
                 key={mate.id}
                 className={`text-sm ${
                   i % 2 === 0 ? "bg-gray-50" : "bg-white"
-                } hover:bg-green-50`}
+                } hover:bg-[#f4f7f5]`}
               >
                 <td className="px-4 py-3 font-medium text-gray-700">
                   {mate.arid}

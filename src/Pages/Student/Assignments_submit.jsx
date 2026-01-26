@@ -12,10 +12,30 @@ export default function AssignmentsPage() {
   const [plagiarismResult, setPlagiarismResult] = useState(null);
 
   const assignments = [
-    { id: 1, title: "Proposal Submission", deadline: "25 Sept 2025", status: "Pending" },
-    { id: 2, title: "Literature Review", deadline: "10 Oct 2025", status: "Pending" },
-    { id: 3, title: "Mid Evaluation Report", deadline: "20 Nov 2025", status: "Pending" },
-    { id: 4, title: "Final Year Report", deadline: "15 Jan 2026", status: "Pending" },
+    {
+      id: 1,
+      title: "Proposal Submission",
+      deadline: "25 Sept 2025",
+      status: "Pending",
+    },
+    {
+      id: 2,
+      title: "Literature Review",
+      deadline: "10 Oct 2025",
+      status: "Pending",
+    },
+    {
+      id: 3,
+      title: "Mid Evaluation Report",
+      deadline: "20 Nov 2025",
+      status: "Pending",
+    },
+    {
+      id: 4,
+      title: "Final Year Report",
+      deadline: "15 Jan 2026",
+      status: "Pending",
+    },
   ];
 
   const handleOpen = (assignment) => {
@@ -36,13 +56,13 @@ export default function AssignmentsPage() {
   };
 
   return (
-    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-green-50">
+    <div className="p-6 md:ml-64 pt-8 min-h-screen bg-[#f4f7f5]">
       <h1 className="text-3xl font-bold text-green-800 mb-6">Assignments</h1>
 
       {/* Assignments Table */}
       <div className="bg-white shadow rounded-2xl overflow-hidden">
         <table className="table-auto w-full text-left border-collapse">
-          <thead className="bg-green-700 text-white">
+          <thead className="bg--primary text-white">
             <tr>
               <th className="p-4">Assignment</th>
               <th className="p-4">Deadline</th>
@@ -52,14 +72,14 @@ export default function AssignmentsPage() {
           </thead>
           <tbody>
             {assignments.map((a) => (
-              <tr key={a.id} className="border-b hover:bg-green-50">
+              <tr key={a.id} className="border-b hover:bg-[#f4f7f5]">
                 <td className="p-4 font-medium">{a.title}</td>
                 <td className="p-4">{a.deadline}</td>
                 <td className="p-4 text-yellow-600">{a.status}</td>
                 <td className="p-4">
                   <button
                     onClick={() => handleOpen(a)}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition"
+                    className="px-4 py-2 bg-green-600 text-white rounded-lg shadow hover:bg--primary transition"
                   >
                     Submit
                   </button>
@@ -76,7 +96,7 @@ export default function AssignmentsPage() {
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl relative">
             {/* Header with Close Button */}
             <div className="flex justify-between items-center border-b p-5">
-              <h2 className="text-xl font-bold text-green-700">
+              <h2 className="text-xl font-bold text--primary">
                 Submit: {selectedAssignment?.title}
               </h2>
               <button
@@ -96,13 +116,20 @@ export default function AssignmentsPage() {
                     <Upload size={50} className="text-green-600" />
 
                     <label className="flex items-center space-x-3 cursor-pointer bg-green-100 px-4 py-2 rounded-lg hover:bg-green-200 transition">
-                      <input type="file" onChange={handleFileUpload} className="hidden" />
-                      <span className="text-green-700 font-medium">Choose File</span>
+                      <input
+                        type="file"
+                        onChange={handleFileUpload}
+                        className="hidden"
+                      />
+                      <span className="text--primary font-medium">
+                        Choose File
+                      </span>
                     </label>
 
                     {file && (
                       <p className="text-sm text-gray-700 mt-2">
-                        Selected: <span className="font-semibold">{file.name}</span>
+                        Selected:{" "}
+                        <span className="font-semibold">{file.name}</span>
                       </p>
                     )}
                   </div>
@@ -110,14 +137,14 @@ export default function AssignmentsPage() {
                   <button
                     onClick={handleSubmit}
                     disabled={!file}
-                    className="mt-6 w-full py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition disabled:bg-gray-300 disabled:cursor-not-allowed"
+                    className="mt-6 w-full py-3 bg-green-600 text-white rounded-lg shadow hover:bg--primary transition disabled:bg-gray-300 disabled:cursor-not-allowed"
                   >
                     Submit Assignment
                   </button>
                 </>
               ) : (
                 <div className="mt-6 text-center">
-                  <h3 className="text-lg font-semibold text-green-700 mb-4">
+                  <h3 className="text-lg font-semibold text--primary mb-4">
                     📊 Plagiarism Report
                   </h3>
 
@@ -129,7 +156,10 @@ export default function AssignmentsPage() {
                           labels: ["Unique", "Plagiarized"],
                           datasets: [
                             {
-                              data: [plagiarismResult.unique, plagiarismResult.plagiarized],
+                              data: [
+                                plagiarismResult.unique,
+                                plagiarismResult.plagiarized,
+                              ],
                               backgroundColor: ["#16a34a", "#dc2626"],
                             },
                           ],
@@ -145,7 +175,7 @@ export default function AssignmentsPage() {
                   {/* Summary */}
                   <div className="mt-4 bg-gray-50 p-4 rounded-lg shadow text-sm">
                     <p>
-                      <span className="font-semibold text-green-700">
+                      <span className="font-semibold text--primary">
                         Unique Content:
                       </span>{" "}
                       {plagiarismResult.unique}%

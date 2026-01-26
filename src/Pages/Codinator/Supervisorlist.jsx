@@ -3,12 +3,14 @@ import { Plus, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function SupervisorList() {
-  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [supervisors, setSupervisors] = useState([
     {
       id: 1,
-      image: "https://www.uaar.edu.pk/media/profile/usman-270422.jpeg",
+      image: "https://www.uaar.edu.pk/media/profile/yasir-151122-1.jpeg",
       firstName: "Dr.",
       lastName: "Yaser Hafeez",
       specialization: "Situational Method Engineering & Agile Practices",
@@ -44,7 +46,7 @@ export default function SupervisorList() {
     },
     {
       id: 5,
-      image: "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Saqib_Majeed.jpg",
+      image: "https://www.uaar.edu.pk/media/profile/X1z4AkT.jpg",
       firstName: "Dr.",
       lastName: "Saqib Majeed",
       specialization: "Semantics Programming & Data Structures",
@@ -53,7 +55,7 @@ export default function SupervisorList() {
     },
     {
       id: 6,
-      image: "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Muhammad_Aqib.jpg",
+      image: "https://www.uaar.edu.pk/media/profile/MuhammadAqib-29-11-19.jpg",
       firstName: "Dr.",
       lastName: "Muhammad Aqib",
       specialization: "Deep Learning & Big Data",
@@ -62,7 +64,7 @@ export default function SupervisorList() {
     },
     {
       id: 7,
-      image: "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Kashif_Sattar.jpg",
+      image: "https://www.uaar.edu.pk/media/profile/kashif-uiit.png",
       firstName: "Dr.",
       lastName: "Kashif Sattar",
       specialization: "Networks & IoT",
@@ -71,7 +73,7 @@ export default function SupervisorList() {
     },
     {
       id: 8,
-      image: "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Tariq_Ali.jpg",
+      image: "https://www.uaar.edu.pk/media/profile/tariq-10072020.jpg",
       firstName: "Dr.",
       lastName: "Tariq Ali",
       specialization: "Machine Learning & Databases",
@@ -80,7 +82,7 @@ export default function SupervisorList() {
     },
     {
       id: 9,
-      image: "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Asif_Nawaz.jpg",
+      image: "https://www.uaar.edu.pk/media/profile/asifuiit.jpg",
       firstName: "Dr.",
       lastName: "Asif Nawaz",
       specialization: "NLP & Social Media Analysis",
@@ -89,7 +91,7 @@ export default function SupervisorList() {
     },
     {
       id: 10,
-      image: "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Sadia_Ali.jpg",
+      image: "https://www.uaar.edu.pk/media/profile/sadia-201222.jpg",
       firstName: "Dr.",
       lastName: "Sadia Ali",
       specialization: "Software Engineering & Machine Learning",
@@ -98,8 +100,7 @@ export default function SupervisorList() {
     },
     {
       id: 11,
-      image:
-        "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Muhammad_Habib.jpg",
+      image: "https://www.uaar.edu.pk/media/profile/habib-070922.jpg",
       firstName: "Dr.",
       lastName: "Muhammad Habib",
       specialization: "Computer Vision & Deep Learning",
@@ -108,7 +109,7 @@ export default function SupervisorList() {
     },
     {
       id: 12,
-      image: "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Ruqia_Bibi.jpg",
+      image: "https://www.uaar.edu.pk/media/profile/ruqia-070922.jpg",
       firstName: "Dr.",
       lastName: "Ruqia Bibi",
       specialization: "Machine Learning & Image Processing",
@@ -116,17 +117,8 @@ export default function SupervisorList() {
       slots: 3,
     },
     {
-      id: 13,
-      image: "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Kanza_Gulzar.jpg",
-      firstName: "Dr.",
-      lastName: "Kanza Gulzar",
-      specialization: "Software Engineering",
-      bio: "Assistant Professor focusing on Software Processes and Improvement.",
-      slots: 3,
-    },
-    {
       id: 14,
-      image: "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Noureen_Zafar.jpg",
+      image: "https://www.uaar.edu.pk/media/profile/noreen-19625.jpg",
       firstName: "Dr.",
       lastName: "Noureen Zafar",
       specialization: "Smart Transportation & Digital Agriculture",
@@ -135,7 +127,7 @@ export default function SupervisorList() {
     },
     {
       id: 15,
-      image: "https://www.uaar.edu.pk/media/profile/yasir-151122-1.jpeg",
+      image: "https://www.uaar.edu.pk/media/profile/Dmx7dLB.jpg",
       firstName: "Ms.",
       lastName: "Bushra Hamid",
       specialization: "Software Requirement & Quality Engineering",
@@ -144,7 +136,7 @@ export default function SupervisorList() {
     },
     {
       id: 16,
-      image: "https://www.uaar.edu.pk/uiit/images/faculty/Dr_Sarfaraz_Bibi.jpg",
+      image: "https://www.uaar.edu.pk/media/profile/sarfraz-14623.jpg",
       firstName: "Dr.",
       lastName: "Sarfaraz Bibi",
       specialization: "Software Quality & NLP",
@@ -154,53 +146,71 @@ export default function SupervisorList() {
   ]);
 
   const [formData, setFormData] = useState({
-    image: "",
+    image: null,
     firstName: "",
     lastName: "",
     specialization: "",
     bio: "",
+    password: "",
     slots: 0,
   });
 
   const handleAddSupervisor = () => {
     setSupervisors([
       ...supervisors,
-      { ...formData, id: supervisors.length + 1 },
+      {
+        id: supervisors.length + 1,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        specialization: formData.specialization,
+        bio: formData.bio,
+        slots: formData.slots,
+        image: formData.image
+          ? URL.createObjectURL(formData.image)
+          : "https://via.placeholder.com/150",
+      },
     ]);
+
     setFormData({
-      image: "",
+      image: null,
       firstName: "",
       lastName: "",
       specialization: "",
       bio: "",
+      password: "",
       slots: 0,
     });
+
     setOpen(false);
   };
 
-  return (
-    <div className="p-6 md:ml-64 pt-20 md:pt-6">
-      {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-        {/* Title + Search */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3 w-full md:w-auto">
-          <h2 className="text-2xl font-bold text-gray-800">Supervisors</h2>
+  const filteredSupervisors = supervisors.filter((sup) =>
+    `${sup.firstName} ${sup.lastName}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase()),
+  );
 
-          {/* Search Bar */}
-          <div className="relative flex-1 sm:w-64">
+  return (
+    <div className="p-6 md:ml-64 pt-20 md:pt-6 bg-gray-50 min-h-screen">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4 mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">Supervisors</h2>
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
+          {/* Search */}
+          <div className="relative w-full sm:w-64">
             <input
               type="text"
               placeholder="Search by name..."
-              //   value={searchTerm}
+              value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg pl-10 pr-3 py-2 focus:ring-2 focus:ring-green-500 outline-none transition text-sm"
+              className="w-full border rounded-lg pl-10 pr-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
             />
             <svg
-              xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 absolute left-3 top-2.5 text-gray-400"
               fill="none"
-              viewBox="0 0 24 24"
               stroke="currentColor"
+              viewBox="0 0 24 24"
             >
               <path
                 strokeLinecap="round"
@@ -210,47 +220,53 @@ export default function SupervisorList() {
               />
             </svg>
           </div>
-        </div>
 
-        {/* Add New Supervisor Button */}
-        <button
-          onClick={() => setOpen(true)}
-          className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition whitespace-nowrap"
-        >
-          <Plus size={18} /> Add New Supervisor
-        </button>
+          {/* Add Supervisor Button */}
+          <button
+            onClick={() => setOpen(true)}
+            className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+          >
+            <Plus size={18} /> Add New Supervisor
+          </button>
+        </div>
       </div>
 
-      {/* Supervisor Cards */}
-
+      {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {supervisors.map((sup) => (
+        {filteredSupervisors.map((sup) => (
           <div
-            onClick={() => {
-              navigate("/coordinator/supervisor-profile");
-            }}
             key={sup.id}
-            // onClick={() => navigate(`/coordinator/supervisor-profile`)}
-            className="bg-white shadow-md rounded-xl p-6 hover:shadow-lg transition cursor-pointer"
+            onClick={() => navigate("/coordinator/supervisor-profile")}
+            className="bg-white p-6 rounded-2xl shadow hover:shadow-lg cursor-pointer transition flex flex-col h-full"
           >
+            {/* Top */}
             <div className="flex items-center gap-4 mb-4">
-              <img
-                src={sup.image}
-                alt="Supervisor"
-                className="h-16 w-16 rounded-full object-cover border"
-              />
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800">
+              <div className="h-16 w-16 rounded-full overflow-hidden border flex-shrink-0">
+                <img
+                  src={sup.image}
+                  alt="Supervisor"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+
+              <div className="min-w-0">
+                <h3 className="text-lg font-semibold text-gray-800 truncate">
                   {sup.firstName} {sup.lastName}
                 </h3>
-                <p className="text-sm text-green-600 font-medium">
+                <p className="text-sm text-green-600 font-medium line-clamp-2">
                   {sup.specialization}
                 </p>
               </div>
             </div>
-            <p className="text-sm text-gray-600 mb-4 line-clamp-3">{sup.bio}</p>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-500">Available Slots:</span>
+
+            {/* Bio */}
+            <p className="text-sm text-gray-600 mb-4 line-clamp-3 flex-grow">
+              {sup.bio}
+            </p>
+
+            {/* Bottom */}
+            <div className="flex justify-between items-center mt-auto">
+              <span className="text-sm text-gray-500">Available Slots</span>
               <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
                 {sup.slots}
               </span>
@@ -262,30 +278,27 @@ export default function SupervisorList() {
       {/* Modal */}
       {open && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-6 relative">
-            {/* Close Button */}
+          <div className="bg-white rounded-2xl w-full max-w-3xl p-6 relative">
             <button
               onClick={() => setOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition"
+              className="absolute top-4 right-4 text-gray-500"
             >
               <X size={22} />
             </button>
 
-            {/* Header */}
             <h2 className="text-xl font-bold text-green-600 mb-6">
               Add New Supervisor
             </h2>
 
-            {/* Form in 2 columns */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Profile Image Upload */}
-              <div className="col-span-2 flex flex-col items-center">
-                <label className="w-32 h-32 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-full cursor-pointer hover:border-green-500 transition">
+              {/* Image Upload */}
+              <div className="col-span-2 flex justify-center">
+                <label className="w-32 h-32 rounded-full border-2 border-dashed flex items-center justify-center cursor-pointer overflow-hidden">
                   {formData.image ? (
                     <img
                       src={URL.createObjectURL(formData.image)}
-                      alt="Profile Preview"
-                      className="w-full h-full rounded-full object-cover"
+                      alt="Preview"
+                      className="w-full h-full object-cover"
                     />
                   ) : (
                     <span className="text-sm text-gray-500">Upload Image</span>
@@ -293,129 +306,75 @@ export default function SupervisorList() {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={(e) =>
-                      setFormData({ ...formData, image: e.target.files[0] })
-                    }
                     className="hidden"
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        image: e.target.files[0],
+                      })
+                    }
                   />
                 </label>
               </div>
 
-              {/* First Name */}
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  value={formData.firstName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, firstName: e.target.value })
-                  }
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              {/* Last Name */}
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  value={formData.lastName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, lastName: e.target.value })
-                  }
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              {/* Specialization */}
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Specialization
-                </label>
-                <input
-                  type="text"
-                  value={formData.specialization}
-                  onChange={(e) =>
-                    setFormData({ ...formData, specialization: e.target.value })
-                  }
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              {/* Available Slots */}
-              {/* <div>
-                <label className="block text-sm font-medium mb-1">
-                  Available Slots
-                </label>
-                <input
-                  type="number"
-                  value={formData.slots}
-                  onChange={(e) =>
-                    setFormData({ ...formData, slots: e.target.value })
-                  }
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div> */}
-              <div className="md:col-span-1">
-                <label className="block text-sm font-medium mb-1">
-                  ID Card Number (Password)
-                </label>
-                <input
-                  type="password"
-                  value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
-                  placeholder="Enter CNIC / ID Card Number"
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              {/* Bio */}
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium mb-1">Bio</label>
-                <textarea
-                  value={formData.bio}
-                  onChange={(e) =>
-                    setFormData({ ...formData, bio: e.target.value })
-                  }
-                  rows={2}
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              {/* Password / ID Card Number */}
-              {/* <div className="md:col-span-2">
-                <label className="block text-sm font-medium mb-1">
-                  ID Card Number (Password)
-                </label>
-                <input
-                  type="password"
-                  value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
-                  placeholder="Enter CNIC / ID Card Number"
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div> */}
+              {/* Inputs */}
+              <input
+                placeholder="First Name"
+                className="border rounded-lg px-3 py-2 w-full"
+                value={formData.firstName}
+                onChange={(e) =>
+                  setFormData({ ...formData, firstName: e.target.value })
+                }
+              />
+              <input
+                placeholder="Last Name"
+                className="border rounded-lg px-3 py-2 w-full"
+                value={formData.lastName}
+                onChange={(e) =>
+                  setFormData({ ...formData, lastName: e.target.value })
+                }
+              />
+              <input
+                placeholder="Specialization"
+                className="border rounded-lg px-3 py-2 w-full"
+                value={formData.specialization}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    specialization: e.target.value,
+                  })
+                }
+              />
+              <input
+                type="password"
+                placeholder="ID Card Number (Password)"
+                className="border rounded-lg px-3 py-2 w-full"
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
+              />
+              <textarea
+                placeholder="Bio"
+                className="border rounded-lg px-3 py-2 md:col-span-2 w-full"
+                rows={2}
+                value={formData.bio}
+                onChange={(e) =>
+                  setFormData({ ...formData, bio: e.target.value })
+                }
+              />
             </div>
 
-            {/* Footer */}
             <div className="flex justify-end gap-3 mt-6">
               <button
                 onClick={() => setOpen(false)}
-                className="px-4 py-2 rounded-lg border hover:bg-gray-100 transition"
+                className="px-4 py-2 border rounded-lg"
               >
                 Cancel
               </button>
               <button
                 onClick={handleAddSupervisor}
-                className="px-5 py-2 rounded-lg bg-green-600 text-white font-medium shadow hover:bg-green-700 transition"
+                className="px-5 py-2 bg-green-600 text-white rounded-lg"
               >
                 Save Supervisor
               </button>
